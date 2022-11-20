@@ -5,6 +5,7 @@ import Region from 'v-region'
 import router from './router/index.js'
 import 'bootstrap/dist/css/bootstrap.css'  // 导入bootstrap.css样式(从node_modules目录下开始找)
 import axios from 'axios'
+
 // import plugins from '/plugins'  // 导入插件
 
 Vue.config.productionTip = false

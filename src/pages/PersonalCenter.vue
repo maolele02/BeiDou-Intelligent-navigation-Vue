@@ -5,7 +5,7 @@
                 
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1">
-                        <img id="profile" src="img/ProfilePic.jpg" alt="profile picture">
+                        <img id="profile" src="../assets/ProfilePic.jpg" alt="profile picture">
                     </div>
                 </div>
                 
@@ -109,47 +109,50 @@ export default {
             }
         });
     },
-    method:{
+    methods:{
         getUserInfo(tag){
             let info = '暂未设置'
-            if(user == None)
+            if(this.user == null)
                 return info
             switch(tag){
                 case 'uid':
-                    return user.uid
+                    return this.user.uid
                 case 'username':
-                    return user.username
+                    return this.user.username
                 case 'name':
-                    return user.name
+                    return this.user.name
                 case 'tel':
-                    return user.tel
+                    return this.user.tel
                 case 'mail':
-                    if(user.mail != None)
-                        return user.mail
+                    if(this.user.mail != None)
+                        return this.user.mail
                     return info        
                 case 'addr_pr':
                     if(user.addr_pr != None)
-                        return user.addr_pr
+                        return this.user.addr_pr
                     return info
                 case 'addr_city':
-                    if(user.addr_city != None)
-                        return user.addr_city
+                    if(this.user.addr_city != None)
+                        return this.user.addr_city
                     return info
                 case 'addr_town':
-                    if(user.addr_town != None)
-                        return user.addr_town
+                    if(this.user.addr_town != None)
+                        return this.user.addr_town
                     return info
                 case 'addr_district':
-                    if(user.addr_district != None)
-                        return user.addr_district
+                    if(this.user.addr_district != None)
+                        return this.user.addr_district
                     return info
                 case 'addr_street':
-                    if(user.addr_street != None)
-                        return user.addr_street
+                    if(this.user.addr_street != None)
+                        return this.user.addr_street
                     return info
                 default:
                     return info
             }
+        },
+        logout(){
+            console.log('logout')
         }
     }
 }
@@ -168,5 +171,14 @@ export default {
     box-shadow: 10px 10px 10px #dedede;
     border-radius:10px;
     margin-top: 30px;
+}
+#profile{
+    border-radius:10px;
+    height: 100px;
+    width: 100px;
+    margin-top: 25px;
+}
+#logo{
+    height: 10px;
 }
 </style>

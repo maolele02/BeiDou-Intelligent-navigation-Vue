@@ -7,7 +7,7 @@
         <div class="col-md-10 col-md-offset-1 func">
             <div class="row">
                 <!--高德地图-->
-                <div id="map_container" class="col-md-12"></div>
+                <MapContainer/>
             </div>
             
             <div class="mainBox">
@@ -81,7 +81,7 @@
 
     <div class="row" v-show="now_state == '订单提交反馈'">
         <div class="col-md-10 col-md-offset-1 func">
-            <span>订单提交成功！</span><button type="button" @click="changePage($event, 2)" class="btn btn-link">点击此处继续生成订单</button>
+            <span>订单提交成功！</span><button type="button" class="btn btn-link">点击此处继续生成订单</button>
         </div>
     </div>
 </div>
@@ -89,8 +89,12 @@
 </template>
 
 <script>
+import MapContainer from '../components/map/MapContainer.vue'
 export default {
     name: 'Reserving',
+    components: {
+        MapContainer
+    },
     props: {
 
     },

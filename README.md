@@ -1,24 +1,7 @@
-# beidou
+# 北斗智能导航
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 简介
+使用vue开发前端，配合flask后端，实现配送路线规划和订单管理。
+在订单生成并审核通过后，服务器发送配送命令给智能车。
+智能车通过北斗模块获取当前的经纬度，发送给服务器，服务器通过高德API进行路径规划，
+路径规划后获得的一系列经纬度发送给智能车，智能车根据经纬度行驶达到运送起点和运送终点。
