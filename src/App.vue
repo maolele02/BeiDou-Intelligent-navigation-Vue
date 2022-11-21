@@ -1,26 +1,17 @@
 <template>
-  <div id="app">
-
-    <div class="container-fluid"  id="root">
-      <div class="row">
-        <LeftMenu msg="Welcome to Your Vue.js App"/>
-        <div class="col-md-10">
-          
-          <!--指定组件的呈现位置-->
-	        <router-view></router-view>
-        </div>
-      </div>
-    </div>
+  <div id="app">  
+    <!--指定组件的呈现位置-->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import LeftMenu from './components/LeftMenu.vue'
+
 
 export default {
   name: 'App',
   components: {
-    LeftMenu
+
   },
   data(){
     return{
