@@ -117,8 +117,8 @@ export default {
                 // console.log("usernameHandler")
                 if(newValue == ''){
                     this.userNameTips = '用户名不能为空';
-                }else if(newValue.length >12){
-                    this.userNameTips = '用户名不能超过12位';
+                }else if(newValue.length >20){
+                    this.userNameTips = '用户名不能超过20位';
                 }else{
                     this.userNameTips = '';
                 }
@@ -146,7 +146,7 @@ export default {
                 if(newValue == ''){
                     this.pwdTips = '密码不能为空';
                 }else if(newValue.length >12){
-                    this.pwdTips = '密码不能超过12位';
+                    this.pwdTips = '密码不能超过20位';
                 }else{
                     this.pwdTips = '';
                 }
@@ -155,7 +155,7 @@ export default {
         confirm_pwd:{
             immediate: false,
             handler(newValue, oldValue){
-                console.log("pwd2:"+newValue);
+                console.log("confirm_pwd:"+newValue);
             }
         }
     },

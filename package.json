@@ -15,7 +15,9 @@
     "jquery": "^3.6.1",
     "v-region": "^2.3.0",
     "vue": "^2.6.14",
-    "vue-router": "^3.6.5"
+    "vue-cookies": "^1.8.2",
+    "vue-router": "^3.6.5",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

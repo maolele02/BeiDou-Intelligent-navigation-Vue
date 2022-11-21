@@ -46,7 +46,7 @@
                                     <router-link active-class="active" to="/register">注册</router-link>
                                 </button>
                             </div>
-                        </div>            
+                        </div>
 
                         <div name="login-info" id="login-info">
 
@@ -70,7 +70,8 @@ export default {
             username: '',
             pwd: '',
             tips1: '',
-            tips2: ''
+            tips2: '',
+            msg: ''
         }
     },
     methods:{
@@ -78,24 +79,30 @@ export default {
             if(this.tips1 != '' || this.tips2 != ''){
                 return;
             }
-            // axios({
-            //         method: 'post',
-            //         url: 'http://localhost:8080/BeiDouCar/user/login',
-            //         data:{
-            //             username: vm.username,
-            //             pwd: vm.pwd
-            //         }
-            //     }).then(res=> {
-            //             this.msg = res.data.msg;
-            //             if(this.msg == '该账号不存在'){
-            //                 alert('该账号不存在');
-            //             }if(this.msg == '密码错误'){
-            //                 alert('密码错误');
-            //             }else if(this.msg == '密码正确'){
-            //                 console.log("密码正确")
-            //                 window.location.href = './user_view.html';
-            //             }
-            // });
+            axios({
+                    method: 'post',
+                    url: 'http://localhost:5000/login',
+                    data:{
+                        username: this.username,
+                        pwd: this.pwd
+                    }
+                }).then(res=> {
+                    this.msg = res.data.msg;
+                    if(this.msg == '该账号不存在'){
+                        alert('该账号不存在');
+                    }if(this.msg == '密码错误'){
+                        alert('密码错误');
+                    }else if(this.msg == '密码正确'){
+                        console.log("密码正确")
+                        let token = res.data.data.token
+                        let uid = res.data.data.uid
+                        // this.$store.dispatch('token', token)
+                        // this.$store.dispatch('uid', uid)
+                        this.$store.commit('token', token)
+                        this.$store.commit('uid', uid)
+                        // 存储在vc.$store.state.xxx中
+                    }
+            });
         }
     },
     watch:{

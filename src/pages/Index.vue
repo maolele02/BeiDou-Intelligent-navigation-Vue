@@ -1,3 +1,11 @@
+<!--
+ * @Author: maolele02
+ * @Date: 2022-11-20 22:50:56
+ * @LastEditTime: 2022-11-21 22:19:21
+ * @LastEditors: maolele02
+ * @Description: 
+ * @FilePath: \beidou\src\pages\Index.vue
+-->
 <template>
   <div id="index">
 
@@ -20,10 +28,14 @@
 <script>
 import LeftMenu from '../components/LeftMenu.vue'
 export default {
-      name: 'Index',
+  name: 'Index',
   components: {
     LeftMenu
   },
+  // 进入该路由前执行
+  beforeRouteEnter(to, from, next){
+    next()
+  }
 }
 </script>
 
