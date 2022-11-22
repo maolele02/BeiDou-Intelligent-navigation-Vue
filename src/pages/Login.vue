@@ -36,8 +36,8 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                                <button  class="btn btn-info" type="button">
-                                    <router-link active-class="active" to="/index/delivery">登录</router-link>
+                                <button  class="btn btn-info" @click="login" type="button">
+                                    登录
                                 </button>
                                 
                             </div>
@@ -79,7 +79,8 @@ export default {
             if(this.tips1 != '' || this.tips2 != ''){
                 return;
             }
-            axios({
+            console.log("login")
+            this.$axios({
                     method: 'post',
                     url: 'http://localhost:5000/login',
                     data:{
@@ -88,19 +89,36 @@ export default {
                     }
                 }).then(res=> {
                     this.msg = res.data.msg;
-                    if(this.msg == '该账号不存在'){
-                        alert('该账号不存在');
-                    }if(this.msg == '密码错误'){
-                        alert('密码错误');
+                    if(this.msg == '用户名或密码错误'){
+                        alert('用户名或密码错误')
                     }else if(this.msg == '密码正确'){
-                        console.log("密码正确")
-                        let token = res.data.data.token
+                        let token = res.data.token
                         let uid = res.data.data.uid
-                        // this.$store.dispatch('token', token)
-                        // this.$store.dispatch('uid', uid)
-                        this.$store.commit('token', token)
-                        this.$store.commit('uid', uid)
-                        // 存储在vc.$store.state.xxx中
+                        console.log('uid: ' + uid)
+                        let username = res.data.data.username
+                        let name = res.data.data.name
+                        let tel = res.data.data.tel
+                        let addr_pr = res.data.data.addr_pr
+                        let addr_city = res.data.data.addrr_city
+                        let addr_town = res.data.data.addr_town
+                        let addr_district = res.data.data.addr_district
+                        let addr_street = res.data.data.addr_street
+
+                        localStorage.setItem('token', token)  // 将token存本地
+                        console.log('token' + localStorage.getItem('token'))
+                        // 存vuex
+                        this.$store.commit('TOKEN', token)
+                        this.$store.commit('UID', uid)
+                        this.$store.commit('USERNAME', username)
+                        this.$store.commit('NAME', name)
+                        this.$store.commit('TEL', tel)
+                        this.$store.commit('ADDR_PR', addr_pr)
+                        this.$store.commit('ADDR_CITY', addr_city)
+                        this.$store.commit('ADDR_TOWN', addr_town)
+                        this.$store.commit('ADDR_DISTRICT', addr_district)
+                        this.$store.commit('ADDR_STREET', addr_street)
+
+                        this.$router.push({path:'/index'})
                     }
             });
         }
@@ -128,7 +146,12 @@ export default {
                 }
             }
         }
-    }
+    },
+//     beforeRouteLeave(to, from, next){
+//         if(to.path=='/index'){
+            
+//         }
+//   }
 
 }
 </script>

@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-18 22:04:40
- * @LastEditTime: 2022-11-21 22:17:32
+ * @LastEditTime: 2022-11-22 20:41:21
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\router\index.js
@@ -20,7 +20,7 @@ const router = new VueRouter({
     routes:[
         {  // 默认路由
             path: '/',
-            redirect: 'login'
+            redirect: 'index/delivery'
             // redirect: 'index/delivery'
         },
         {
