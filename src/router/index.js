@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-18 22:04:40
- * @LastEditTime: 2022-11-22 20:41:21
+ * @LastEditTime: 2022-11-23 20:32:52
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\router\index.js

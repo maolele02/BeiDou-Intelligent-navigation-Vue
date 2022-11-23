@@ -1,3 +1,11 @@
+<!--
+ * @Author: maolele02
+ * @Date: 2022-11-18 22:09:19
+ * @LastEditTime: 2022-11-23 21:41:49
+ * @LastEditors: maolele02
+ * @Description: 
+ * @FilePath: \beidou\src\pages\MyOrder.vue
+-->
 <template>
 <div>
   <span>{{now_state}}</span>
@@ -7,7 +15,7 @@
       <div class="col-md-10 col-md-offset-1 shadow">
           <div class="mainBox">
               <div v-if="orders == null">
-                  <span>您当前没有生成订单，点击<router-link active-class="active" to="/reserving">此处</router-link>进行配送预约</span>
+                  <span>您当前没有生成订单，点击<router-link active-class="active" to="/index/reserving">此处</router-link>进行配送预约</span>
               </div>
               <template v-if="orders != null">
                 <table class="table table-hover" v-cloak>

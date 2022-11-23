@@ -42,8 +42,8 @@
                                 
                             </div>
                             <div class="col-md-2 col-md-offset-1">
-                                <button  class="btn btn-info" type="button">
-                                    <router-link active-class="active" to="/register">注册</router-link>
+                                <button  class="btn btn-info" @click="register" type="button">
+                                    注册
                                 </button>
                             </div>
                         </div>
@@ -75,6 +75,9 @@ export default {
         }
     },
     methods:{
+        register(){
+            this.$router.push({path:'/register'})
+        },
         login(){
             if(this.tips1 != '' || this.tips2 != ''){
                 return;
@@ -94,31 +97,10 @@ export default {
                     }else if(this.msg == '密码正确'){
                         let token = res.data.token
                         let uid = res.data.data.uid
-                        console.log('uid: ' + uid)
-                        let username = res.data.data.username
-                        let name = res.data.data.name
-                        let tel = res.data.data.tel
-                        let addr_pr = res.data.data.addr_pr
-                        let addr_city = res.data.data.addrr_city
-                        let addr_town = res.data.data.addr_town
-                        let addr_district = res.data.data.addr_district
-                        let addr_street = res.data.data.addr_street
 
                         localStorage.setItem('token', token)  // 将token存本地
-                        console.log('token' + localStorage.getItem('token'))
-                        // 存vuex
-                        this.$store.commit('TOKEN', token)
-                        this.$store.commit('UID', uid)
-                        this.$store.commit('USERNAME', username)
-                        this.$store.commit('NAME', name)
-                        this.$store.commit('TEL', tel)
-                        this.$store.commit('ADDR_PR', addr_pr)
-                        this.$store.commit('ADDR_CITY', addr_city)
-                        this.$store.commit('ADDR_TOWN', addr_town)
-                        this.$store.commit('ADDR_DISTRICT', addr_district)
-                        this.$store.commit('ADDR_STREET', addr_street)
-
-                        this.$router.push({path:'/index'})
+                        localStorage.setItem('uid', uid)
+                        this.$router.push({path:'/index/delivery'})
                     }
             });
         }
@@ -139,7 +121,7 @@ export default {
             handler(newValue, oldValue){
                 if(newValue == ''){
                     this.tips2 = '密码不能为空';
-                }else if(newValue.length > 12){
+                }else if(newValue.length > 20){
                     this.tips2 = '密码过长';
                 }else{
                     this.tips2 = '';

@@ -8,7 +8,7 @@
                         <div class="col-md-12">
                             <div class="row inputs">
                                 <div class="col-md-12">
-                                    <label><sup>*</sup>用户名：</label><input type="text" placeholder="3-12位" class="form-control" v-model="username">
+                                    <label><sup>*</sup>用户名：</label><input type="text" placeholder="" class="form-control" v-model="username">
                                 </div>
                             </div>
 
@@ -26,13 +26,13 @@
     
                             <div class="row inputs">
                                 <div class="col-md-12">
-                                    <label>电子邮箱：</label><input type="text" placeholder="" class="form-control" v-model="mail">
+                                    <label><sup>*</sup>电子邮箱：</label><input type="text" placeholder="" class="form-control" v-model="mail">
                                 </div>
                             </div>
     
                             <div class="row inputs">
                                 <div class="col-md-12">
-                                    <label><sup>*</sup>密码：</label><input type="password" placeholder="6-12位，包含数字、大小写字母和特殊字符" class="form-control" v-model="pwd">
+                                    <label><sup>*</sup>密码：</label><input type="password" placeholder="" class="form-control" v-model="pwd">
                                 </div>
                             </div>
                              
@@ -62,6 +62,12 @@
                             <span>{{userNameTips}}</span>
                         </div>
                     </div>
+
+                    <div class="row tip">
+                        <div class="col-md-12">
+                            <span>{{nameTips}}</span>
+                        </div>
+                    </div>
     
                     <div class="row tip">
                         <div class="col-md-12">
@@ -71,13 +77,19 @@
     
                     <div class="row tip">
                         <div class="col-md-12">
-                            <span></span>
+                            <span>{{mailTips}}</span>
                         </div>
                     </div>
     
                     <div class="row tip">
                         <div class="col-md-12">
                             <span>{{pwdTips}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row tip">
+                        <div class="col-md-12">
+                            <span>{{confirmTips}}</span>
                         </div>
                     </div>
                 </div>
@@ -106,8 +118,11 @@ export default {
             confirm_pwd: null,
 
             userNameTips: '',
+            nameTips: '',
+            mailTips: '',
             telTips: '',
-            pwdTips: ''
+            pwdTips: '',
+            confirmTips: ''
         }
     },
     watch:{
@@ -115,7 +130,7 @@ export default {
             immediate: false,
             handler(newValue, oldValue){
                 // console.log("usernameHandler")
-                if(newValue == ''){
+                if(newValue == '' || newValue == null){
                     this.userNameTips = '用户名不能为空';
                 }else if(newValue.length >20){
                     this.userNameTips = '用户名不能超过20位';
@@ -124,28 +139,54 @@ export default {
                 }
             }
         },
+        name:{
+            immediate: false,
+            handler(newValue, oldValue){
+                // console.log("usernameHandler")
+                if(newValue == '' || newValue == null){
+                    this.nameTips = '昵称不能为空';
+                }else if(newValue.length >20){
+                    this.nameTips = '昵称不能超过20位';
+                }else{
+                    this.nameTips = '';
+                }
+            }
+        },
         tel:{
             immediate: false,
             handler(newValue, oldValue){
                 let regex = /\D+/;
                 // console.log("usernameHandler")
-                if(newValue == ''){
+                if(newValue == '' || newValue == null){
                     this.telTips = '电话号码不能为空';
                 }else if(regex.test(newValue)){
                     this.telTips = '电话号码格式不正确';
-                }else if(newValue.length > 11){
+                }else if(newValue.length != 11){
                     this.telTips = '电话号码格式不正确';
                 }else{
                     this.telTips = '';
                 }
             }
         },
+        mail:{
+            immediate: false,
+            handler(newValue, oldValue){
+                let regex = /\w+@{1}\w+\.+\w+/;
+                if(newValue == '' || newValue == null){
+                    this.mailTips = '邮箱不能为空';
+                }else if(!regex.test(newValue)){
+                    this.mailTips = '邮箱格式不正确';
+                }else{
+                    this.mailTips = '';
+                }
+            }
+        },
         pwd:{
             immediate: false,
             handler(newValue, oldValue){
-                if(newValue == ''){
+                if(newValue == '' || newValue == null){
                     this.pwdTips = '密码不能为空';
-                }else if(newValue.length >12){
+                }else if(newValue.length >20){
                     this.pwdTips = '密码不能超过20位';
                 }else{
                     this.pwdTips = '';
@@ -155,46 +196,70 @@ export default {
         confirm_pwd:{
             immediate: false,
             handler(newValue, oldValue){
-                console.log("confirm_pwd:"+newValue);
+                if(newValue != this.pwd){
+                    this.confirmTips = '与确认密码不一致'
+                }
             }
         }
     },
     methods:{
         reset(){
-            this.username = '';
-            this.name = '';
-            this.tel = '';
-            this.mail ='';
-            this.pwd = '';
-            this.confirm_pwd = '';
-            this.msg = '';
+            this.username = null;
+            this.name = null;
+            this.tel = null;
+            this.mail = null;
+            this.pwd = null;
+            this.confirm_pwd = null;
+
             this.telTips = '';
             this.userNameTips = '';
             this.pwdTips = '';
             console.log("重置成功");
         },
         out(){
-            let pwdReg1 = /.*\d+.*/;
-            let pwdReg2 = /.*[a-z]+.*/;
-            let pwdReg3 = /.*[A-Z]+.*/;
-            let pwdReg4 = /.*[_\W]+.*/;
-            let mailRegex = /@{1}.+/;
-            if(this.telTips!='' || this.userNameTips!='' || this.pwdTips!=''){
-                return;
-            }else if(this.username == '' || this.tel == '' || this.pwd == '' || this.pwd2 == ''){
-                alert("您还有必填项未填写！");
-            }else if(this.pwd.length < 6){
-                alert("密码必须6-12位！");
-            }else if(!pwdReg1.test(this.pwd)||!pwdReg2.test(this.pwd)||!pwdReg3.test(this.pwd)||!pwdReg4.test(this.pwd)){
-                alert("密码格式不正确");
-            }else if(this.pwd2 != this.pwd){
-                console.log("pwd:"+this.pwd+";pwd2:"+this.pwd2);
-                alert("密码与确认密码不一致！");
-            }else if(!mailRegex.test(this.mail)){
-                alert("电子邮箱格式不正确！");
-            }else{
-                
+            if(this.telTips=='' && this.userNameTips=='' && this.pwdTips=='' &&
+                this.mailTips=='' && this.nameTips=='' && this.confirmTips==''){
+                this.$axios({
+                    method: 'post',
+                    url: 'http://localhost:5000/register',
+                    data: {
+                        username: this.username,
+                        name: this.name,
+                        tel: this.tel,
+                        mail: this.mail,
+                        pwd: this.pwd
+                    }
+                }).then(res=> {
+                    if(res.data.msg == '注册失败'){
+                        alert("注册失败，请重新提交")
+                    }else{
+                        console.log('注册成功')
+                        this.$router.push({path:'/login'})
+                    }
+                })
             }
+
+            // let pwdReg1 = /.*\d+.*/;
+            // let pwdReg2 = /.*[a-z]+.*/;
+            // let pwdReg3 = /.*[A-Z]+.*/;
+            // let pwdReg4 = /.*[_\W]+.*/;
+            // let mailRegex = /@{1}.+/;
+            // if(this.telTips!='' || this.userNameTips!='' || this.pwdTips!=''){
+            //     return;
+            // }else if(this.username == '' || this.tel == '' || this.pwd == '' || this.pwd2 == ''){
+            //     alert("您还有必填项未填写！");
+            // }else if(this.pwd.length < 6){
+            //     alert("密码必须6-12位！");
+            // }else if(!pwdReg1.test(this.pwd)||!pwdReg2.test(this.pwd)||!pwdReg3.test(this.pwd)||!pwdReg4.test(this.pwd)){
+            //     alert("密码格式不正确");
+            // }else if(this.pwd2 != this.pwd){
+            //     console.log("pwd:"+this.pwd+";pwd2:"+this.pwd2);
+            //     alert("密码与确认密码不一致！");
+            // }else if(!mailRegex.test(this.mail)){
+            //     alert("电子邮箱格式不正确！");
+            // }else{
+                
+            // }
         }
     }
         
@@ -215,7 +280,7 @@ export default {
     margin-top: 100px;
 }
 .tip{
-    margin-top: 50px;
+    margin-top: 47px;
 }
 span{
     display: block;

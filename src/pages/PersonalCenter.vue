@@ -19,7 +19,25 @@
                     <div class="col-md-12 col-md-offset-1 userInfo">
                         <b>用户名：</b>
                         <br/>
-                        <span>{{getUserInfo('username')}}</span>
+                        <span>{{$store.state.username}}</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr class="info_hr">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-1 userInfo">
+                        <div class="row">
+                            <div class="col-md-12"><b>昵称：</b></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><span>{{$store.state.name}}</span></div>
+                            <div class="col-md-4"><button class="btn btn-info" @click="modify">修改</button></div>
+                        </div>
                     </div>
                 </div>
 
@@ -31,9 +49,13 @@
         
                 <div class="row">
                     <div class="col-md-12 col-md-offset-1 userInfo">
-                        <b>电话号码：</b>
-                        <br>
-                        <span>{{getUserInfo('tel')}}</span>
+                        <div class="row">
+                            <div class="col-md-12"><b>电话号码：</b></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><span>{{$store.state.tel}}</span></div>
+                            <div class="col-md-4"><button class="btn btn-info" @click="modify">修改</button></div>
+                        </div>
                     </div>
                 </div>
         
@@ -45,9 +67,13 @@
 
                 <div class="row">
                     <div class="col-md-12 col-md-offset-1 userInfo">
-                        <b>邮箱：</b>
-                        <br>
-                        <span>{{getUserInfo('mail')}}</span>
+                        <div class="row">
+                            <div class="col-md-12"><b>邮箱：</b></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><span>{{$store.state.mail}}</span></div>
+                            <div class="col-md-4"><button class="btn btn-info" @click="modify">修改</button></div>
+                        </div>
                     </div>
                 </div>
         
@@ -59,11 +85,13 @@
 
                 <div class="row">
                     <div class="col-md-12 col-md-offset-1 userInfo">
-                        <b>地址：</b>
-                        <br>
-                        <span>
-                            {{getUserInfo('addr_pr')}}{{getUserInfo('addr_city')}}{{getUserInfo('addr_town')}}{{getUserInfo('addr_district')}}{{getUserInfo('addr_street')}}
-                        </span>
+                        <div class="row">
+                            <div class="col-md-12"><b>邮箱：</b></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5"><span>{{getAddrInfo()}}</span></div>
+                            <div class="col-md-4"><button class="btn btn-info" @click="modify">修改</button></div>
+                        </div>
                     </div>
                 </div>
         
@@ -74,10 +102,7 @@
                 </div>
 
                 <div class="row userInfo">
-                    <div class="col-md-1 col-md-offset-1">
-                        <button class="btn btn-info">修改资料</button>
-                    </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 col-md-offset-3">
                         <button class="btn btn-info" @click="logout">退出登录</button>
                     </div>
                 </div>
@@ -91,68 +116,27 @@ export default {
     name: 'PersonalCenter',
     data(){
         return{
-            now_state: '个人中心',
-            user: null,
+            now_state: '个人中心'
         }
     },
     created(){
-        this.$axios({
-            method: 'get',
-            url: 'http://localhost:5000/user/1',
-            }).then(res=> {
-            let user_query = res.data.data
-            if(user != None){
-                this.user = user_query
-            }
-            else{
-                console.log('用户不存在')
-            }
-        });
+
     },
     methods:{
-        getUserInfo(tag){
-            let info = '暂未设置'
-            if(this.user == null)
-                return info
-            switch(tag){
-                case 'uid':
-                    return this.user.uid
-                case 'username':
-                    return this.user.username
-                case 'name':
-                    return this.user.name
-                case 'tel':
-                    return this.user.tel
-                case 'mail':
-                    if(this.user.mail != None)
-                        return this.user.mail
-                    return info        
-                case 'addr_pr':
-                    if(user.addr_pr != None)
-                        return this.user.addr_pr
-                    return info
-                case 'addr_city':
-                    if(this.user.addr_city != None)
-                        return this.user.addr_city
-                    return info
-                case 'addr_town':
-                    if(this.user.addr_town != None)
-                        return this.user.addr_town
-                    return info
-                case 'addr_district':
-                    if(this.user.addr_district != None)
-                        return this.user.addr_district
-                    return info
-                case 'addr_street':
-                    if(this.user.addr_street != None)
-                        return this.user.addr_street
-                    return info
-                default:
-                    return info
-            }
+        getAddrInfo(){
+            if(this.$store.state.addr_pr == null)
+                return '暂未设置'
+            return this.$store.state.addr_pr+' '+this.$store.state.addr_city+' '
+                    +this.$store.state.addr_town+' '+this.$store.state.addr_district+' '
+                    +this.$store.state.street;
+        },
+        modify(){
+
         },
         logout(){
-            console.log('logout')
+            localStorage.removeItem('token')
+            localStorage.removeItem('uid')
+            this.$router.push({path:'/login'})
         }
     }
 }
