@@ -147,7 +147,7 @@ export default {
             url: 'http://localhost:5000/user/1',
             }).then(res=> {
             let user = res.data.data
-            if(user != None){
+            if(user != null){
                 this.order.s_uid = user.s_uid
                 this.order.s_name = user.name
                 this.order.s_addr_pr = user.addr_pr
@@ -189,5 +189,8 @@ export default {
 }
 .regin{
     margin-left: 15px;
+}
+.mainBox{
+    margin-top: 60px;
 }
 </style>

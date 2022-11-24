@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-        <div id="main">
+        <div id='main'>
             <div class="row Box">
             
-                <div class="col-md-4 col-md-offset-3" id="main">
+                <div class="col-md-4 col-md-offset-3">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row inputs">
@@ -272,6 +272,7 @@ export default {
     height: 500px;
 }
 .Box{
+    margin-top: 60px;
     border-radius:10px;
     background-color: white;
     box-shadow: 10px 10px 10px #dedede;
