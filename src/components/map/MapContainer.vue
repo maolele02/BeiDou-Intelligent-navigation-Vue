@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-20 11:56:34
- * @LastEditTime: 2022-11-24 14:58:52
+ * @LastEditTime: 2022-11-25 16:05:29
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\map\MapContainer.vue
@@ -28,6 +28,7 @@
 
 <script>
 import AMapLoader from '@amap/amap-jsapi-loader'  // 导入高德组件
+import store from '../../store/index.js'
 window._AMapSecurityConfig = {
     securityJsCode: '23a606b71f8db5f3ec3416efb8296077'
 }
@@ -43,7 +44,8 @@ export default {
             mouseTool : null,
             overlays : [],
             auto : null,
-            placeSearch : null, 
+            placeSearch : null,
+            cnt: 0
         }
     },
     methods : {
@@ -85,12 +87,12 @@ export default {
 
                 function onComplete (data) {
                     // data是具体的定位信息
-                    console.log(data)
+                    // console.log(data)
                 }
 
                 function onError (data) {
                     // 定位出错
-                    console.log('ip定位失败')
+                    // console.log('ip定位失败')
                 }
 
                 this.map.addControl(new AMap.MapType())
@@ -105,10 +107,31 @@ export default {
                 });  //构造地点查询类
 
                 this.auto.on("select", this.select);//注册监听，当选中某条记录时会触发
+
+                    //为地图注册click事件获取鼠标点击出的经纬度坐标
+                this.map.on('click', function(e) {
+                    //localStorage.getItem('token')
+                    if(this.cnt == 0){
+                        let begin_lnglat = e.lnglat.getLng() + ',' + e.lnglat.getLat()
+                        store.commit('BEGIN_LNGLAT', begin_lnglat)
+                        this.cnt++
+                    }
+                    else if(this. cnt == 1){
+                        let end_lnglat = e.lnglat.getLng() + ',' + e.lnglat.getLat()
+                        store.commit('END_LNGLAT', end_lnglat)
+                        this.cnt++
+                    }
+                    else{
+                        this.cnt = 0
+                        store.commit('BEGIN_LNGLAT', '')
+                        store.commit('END_LNGLAT', '')
+                    }
+                    
+                });
                 
 
             }).catch(e => {
-                console.log(e);
+                // console.log(e);
             });
         },
         select(e) {

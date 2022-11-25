@@ -14,67 +14,51 @@
                 <!--订单信息填写-->
                     <div class="row">
                         <div class="col-md-6">
-                            寄件人：<input type="text" name="" id="" class="form-control" v-model="order.s_name"/>
+                            寄件人：<input type="text" name="" id="" class="form-control" v-model="order.s_name"/><br/>
                             寄件人电话号码：<input type="text" name="" id="" class="form-control" v-model="order.s_tel"/>
                         </div>
                         <div class="col-md-6">
-                            收件人：<input type="text" name="" id="" class="form-control" v-model="order.r_name"/>
+                            收件人：<input type="text" name="" id="" class="form-control" v-model="order.r_name"/><br/>
                             收件人电话号码：<input type="text" name="" id="" class="form-control" v-model="order.r_tel"/>
                         </div>
                     </div>
-
+                    <br/>
                     <div class="row">
-                        <div class="col-md-6">
-                            寄件地址: <br>
-                            <div class="row">
-                                <v-region-selects class="regin"
-                                :town="true"
-                                v-model="s_region"
-                                @change="regionChange" 
-                                />
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 marginTop20">
-                                    <input type="text" name="s_street" id="s_street" placeholder="详细地址" class="form-control" v-model="order.s_addr_street"/>
-                                </div>
-                            </div>
+                        <div class="col-md-2">起点经纬度:</div>
+                        <div class="col-md-4">
+                            <span>{{$store.state.begin_lnglat}}</span>
                         </div>
-
-                        <div class="col-md-6">
-                            收件地址:<br>
-                            <div class="row">
-                                <v-region-selects class="regin"
-                                :town="true"
-                                v-model="r_region"
-                                @change="regionChange" 
-                                />
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 marginTop20">
-                                    <input type="text" name="r_street" id="r_street" placeholder="详细地址" class="form-control" v-model="order.r_addr_street"/>
-                                </div>
-                            </div>
+                        <div class="col-md-2">终点经纬度:</div>
+                        <div class="col-md-4">
+                            <span>{{$store.state.end_lnglat}}</span>
                         </div>
                     </div>
 
                     <br />
                     <div class="row">
-                        <div class="col-sm-1">物品数量:</div>
-                        <div class="col-sm-1">
+                        <div class="col-md-2">物品数量:</div>
+                        <div class="col-md-1 col-md-pull-1">
                             <input type="number" name="" id="" class="form-control" v-model="order.item_num"/>
                         </div>
-                        <div class="col-sm-1">物品重量(kg):</div>
-                        <div class="col-sm-1">
-                            <input type="number" name="" id="" class="form-control" v-model="order.item_weight"/>
+                        <div class="col-md-2">物品重量(kg):</div>
+                        <div class="col-md-1 col-md-pull-1">
+                            <input name="" id="" class="form-control" v-model="order.item_weight"/>
                         </div>
-                        <div class="col-sm-1 col-sm-offset-2">物品类型:</div>
-                        <div class="col-md-2">
+                        <div class="col-md-2">物品类型:</div>
+                        <div class="col-md-2 col-md-pull-1">
                             <input type="text" name="" id="" class="form-control" v-model="order.item_type"/>
                         </div>
                     </div>
                     <br/>
+                    <div class="row">
+                        <div class="col-md-1">备注:</div>
+                        <div class="col-md-10">
+                            <textarea name="" id="" cols="25" rows="3" v-model="order.remark"></textarea>
+                        </div>
+                    </div>
+                    <br/>
                     <div class="row"></div>
-                    <button class="btn btn-info col-md-2" @click="changePage($event, 4)">提交</button>
+                    <button class="btn btn-info col-md-2" @click="submit">提交</button>
             </div>
         </div>
     </div>
@@ -90,6 +74,7 @@
 
 <script>
 import MapContainer from '../components/map/MapContainer.vue'
+import store from '../store/index.js'
 export default {
     name: 'Reserving',
     components: {
@@ -101,60 +86,36 @@ export default {
     data(){
       return {
         now_state: '配送预约',
-        s_region: {
-            province: '350000',
-            city: '350100',
-            area: '350104',
-            town: '350104008'
-        },
-        r_region: {
-            province: '350000',
-            city: '350100',
-            area: '350104',
-            town: '350104008'
-        },
         order: {
             s_uid: '',
             s_name: '',
             s_tel: '',
-            s_addr_pr: '',
-            s_addr_city: '',
-            s_addr_town: '',
-            s_addr_district: '',
-            s_addr_street: '',
 
-            r_uid: '',
             r_name: '',
             r_tel: '',
-            r_addr_pr: '',
-            r_addr_city: '',
-            r_addr_town: '',
-            r_addr_district: '',
-            r_addr_street: '',
 
             item_num: '',
             item_type: '',
             item_weight: '',
             remark: '',
-            state: '',
-            order_time: ''
+
+            begin_lnglat: '',
+            end_lnglat: ''
         }
       }
     },
     created(){
+        let uid = localStorage.getItem('uid')
+        this.order.s_uid = uid
         this.$axios({
             method: 'get',
-            url: 'http://localhost:5000/user/1',
+            url: 'http://localhost:5000/user/'+uid,
             }).then(res=> {
             let user = res.data.data
             if(user != null){
-                this.order.s_uid = user.s_uid
+                this.order.s_uid = user.uid
                 this.order.s_name = user.name
-                this.order.s_addr_pr = user.addr_pr
-                this.order.s_addr_city = user.addr_city
-                this.order.s_addr_town = user.addr_town
-                this.order.s_addr_district = user.addr_district
-                this.order.s_addr_street = user.addr_street
+                this.order.s_tel = user.tel
             }
             else{
                 console.log('用户不存在')
@@ -163,13 +124,44 @@ export default {
         });
     },
     methods:{
-        uploade_order(){
+        submit(){
+            let regex = /\d+\.*\d*/
+            if(
+                this.order.s_name == '' ||
+                this.order.s_tel == '' ||
+                this.order.r_name == '' ||
+                this.order.r_tel == '' ||
+                this.order.item_num == '' ||
+                this.order.item_type == '' ||
+                this.order.item_weight == '' ||
+                this.order.remark == '' ||
+                this.order.begin_lnglat == '' ||
+                this.order.end_lnglat == ''
+            ){
+                alert('请将信息填写完毕后再提交！')
+                return;
+            }
+            else if(!regex.test(this.order.item_weight)){
+                alert('物品重量填写不合法！')
+                return;
+            }
+            let num = parseInt(this.order.item_num)
+            let weight = parseFloat(this.order.item_weight)
+            this.order.item_num = num
+            this.order.item_weight = weight
+            this.order.begin_lnglat = store.state.begin_lnglat
+            this.order.end_lnglat = store.state.end_lnglat
             this.$axios({
             method: 'post',
             url: 'http://localhost:5000/order',
             data: this.order
             }).then(res=> {
-                
+                if(res.data.msg == '订单提交成功'){
+                    alert('订单提交成功！')
+                }
+                if(res.data.msg == '订单提交失败'){
+                    alert('订单提交失败，请重试！')
+                }
             });
         },
         regionChange (data) {

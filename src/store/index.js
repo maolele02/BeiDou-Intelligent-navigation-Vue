@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-21 21:14:38
- * @LastEditTime: 2022-11-23 20:25:25
+ * @LastEditTime: 2022-11-25 14:53:37
  * @LastEditors: maolele02
  * @Description: Vuex的配置
  * @FilePath: \beidou\src\store\index.js
@@ -44,6 +44,12 @@ const mutations = {
     MAIL(state, value){
         state.mail = value
     },
+    BEGIN_LNGLAT(state, value){
+        state.begin_lnglat = value
+    },
+    END_LNGLAT(state, value){
+        state.end_lnglat = value
+    },
     ADDR_PR(state, value){
         state.addr_pr = value
     },
@@ -66,6 +72,8 @@ const state = {
     uid: null,
     username: null,
     name: null,
+    begin_lnglat: '',
+    end_lnglat: '',
     tel: null,
     mail: null,
     addr_pr: null,

@@ -86,7 +86,7 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-1 userInfo">
                         <div class="row">
-                            <div class="col-md-12"><b>邮箱：</b></div>
+                            <div class="col-md-12"><b>地址：</b></div>
                         </div>
                         <div class="row">
                             <div class="col-md-5"><span>{{getAddrInfo()}}</span></div>
