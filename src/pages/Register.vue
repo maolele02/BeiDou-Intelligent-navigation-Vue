@@ -57,7 +57,7 @@
     
     
                 <div class="col-md-4 tips">
-                    <div class="row">
+                    <div class="row tip">
                         <div class="col-md-12">
                             <span>{{userNameTips}}</span>
                         </div>
@@ -198,6 +198,8 @@ export default {
             handler(newValue, oldValue){
                 if(newValue != this.pwd){
                     this.confirmTips = '与确认密码不一致'
+                }else{
+                    this.confirmTips = ''
                 }
             }
         }
@@ -238,28 +240,6 @@ export default {
                     }
                 })
             }
-
-            // let pwdReg1 = /.*\d+.*/;
-            // let pwdReg2 = /.*[a-z]+.*/;
-            // let pwdReg3 = /.*[A-Z]+.*/;
-            // let pwdReg4 = /.*[_\W]+.*/;
-            // let mailRegex = /@{1}.+/;
-            // if(this.telTips!='' || this.userNameTips!='' || this.pwdTips!=''){
-            //     return;
-            // }else if(this.username == '' || this.tel == '' || this.pwd == '' || this.pwd2 == ''){
-            //     alert("您还有必填项未填写！");
-            // }else if(this.pwd.length < 6){
-            //     alert("密码必须6-12位！");
-            // }else if(!pwdReg1.test(this.pwd)||!pwdReg2.test(this.pwd)||!pwdReg3.test(this.pwd)||!pwdReg4.test(this.pwd)){
-            //     alert("密码格式不正确");
-            // }else if(this.pwd2 != this.pwd){
-            //     console.log("pwd:"+this.pwd+";pwd2:"+this.pwd2);
-            //     alert("密码与确认密码不一致！");
-            // }else if(!mailRegex.test(this.mail)){
-            //     alert("电子邮箱格式不正确！");
-            // }else{
-                
-            // }
         }
     }
         
@@ -278,10 +258,11 @@ export default {
     box-shadow: 10px 10px 10px #dedede;
 }
 .tips{
-    margin-top: 100px;
+    margin-top: -5px;
 }
 .tip{
     margin-top: 47px;
+    /* background-color: black; */
 }
 span{
     display: block;

@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-18 22:09:19
- * @LastEditTime: 2022-11-23 21:41:49
+ * @LastEditTime: 2022-11-27 16:47:42
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\MyOrder.vue
@@ -30,7 +30,7 @@
                     <th>配送状态</th>
                     </tr>
                     
-                    <tr class="active v-cloak" :key="order.order_id">
+                    <tr class="active v-cloak" v-for="order in orders" :key="order.order_id">
                         <td>{{order.order_id}}</td>
                         <th>{{order.order_time}}</th>
                         <td>{{order.s_addr_pro}}{{order.s_addr_city}}{{order.s_addr_district}}{{order.s_addr_street}}</td>
@@ -69,6 +69,13 @@ export default {
           // console.log(this); // 使用箭头函数，这里的this指向Vue实例
           if(res_data != null)
             for(let i=0; i<res_data.length; i++){
+              // 对GMT时间格式做转换
+               let timeGMT = res_data[i].order_time;
+               let datetime = new Date(timeGMT);
+               let localTime = datetime.toLocaleString();
+               res_data[i].order_time = localTime;
+
+              // 对state做转换
                 let state = res_data[i].state;
                 if(state == 0){
                   res_data[i].state = '等待审核';
@@ -91,6 +98,8 @@ export default {
             }
           this.orders = res_data;
           });
+  },
+  methods:{
   }
 }
 </script>

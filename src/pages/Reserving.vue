@@ -126,6 +126,8 @@ export default {
     methods:{
         submit(){
             let regex = /\d+\.*\d*/
+            this.order.begin_lnglat = store.state.begin_lnglat
+            this.order.end_lnglat = store.state.end_lnglat
             if(
                 this.order.s_name == '' ||
                 this.order.s_tel == '' ||
@@ -134,7 +136,6 @@ export default {
                 this.order.item_num == '' ||
                 this.order.item_type == '' ||
                 this.order.item_weight == '' ||
-                this.order.remark == '' ||
                 this.order.begin_lnglat == '' ||
                 this.order.end_lnglat == ''
             ){
@@ -149,15 +150,13 @@ export default {
             let weight = parseFloat(this.order.item_weight)
             this.order.item_num = num
             this.order.item_weight = weight
-            this.order.begin_lnglat = store.state.begin_lnglat
-            this.order.end_lnglat = store.state.end_lnglat
             this.$axios({
             method: 'post',
             url: 'http://localhost:5000/order',
             data: this.order
             }).then(res=> {
                 if(res.data.msg == '订单提交成功'){
-                    alert('订单提交成功！')
+                    this.$router.push({path:'index/complete'})
                 }
                 if(res.data.msg == '订单提交失败'){
                     alert('订单提交失败，请重试！')
@@ -165,7 +164,7 @@ export default {
             });
         },
         regionChange (data) {
-            console.log(data)
+            // console.log(data)
         }
     }
 }

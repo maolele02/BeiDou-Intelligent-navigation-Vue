@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-18 22:04:40
- * @LastEditTime: 2022-11-23 20:32:52
+ * @LastEditTime: 2022-11-27 16:16:19
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\router\index.js
@@ -14,6 +14,7 @@ import Register from '../pages/Register'
 import MyOrder from '../pages/MyOrder';  // 引入组件
 import PersonalCenter from '../pages/PersonalCenter';
 import Reserving from '../pages/Reserving';
+import OrderComplete from '../pages/OrderComplete';
 
 // 创建路由
 const router = new VueRouter({
@@ -53,6 +54,11 @@ const router = new VueRouter({
                     name: 'reserving',
                     path: 'reserving',
                     component: Reserving
+                },
+                {
+                    name: 'ordercomplete',
+                    path: 'complete',
+                    component: OrderComplete
                 }
               ]
         }
