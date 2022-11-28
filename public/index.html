@@ -1,3 +1,11 @@
+<!--
+ * @Author: maolele02
+ * @Date: 2022-11-18 20:46:03
+ * @LastEditTime: 2022-11-28 17:10:11
+ * @LastEditors: maolele02
+ * @Description: 
+ * @FilePath: \beidou\public\index.html
+-->
 <!DOCTYPE html>
 <html lang="">
   <head>
@@ -6,6 +14,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.png">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style type="text/css">
+      /* 隐藏高德logo */
+      .amap-logo{
+          display: none;
+          opacity:0 !important;
+       }
+       .amap-copyright {
+           opacity:0;
+       }
+    </style>
   </head>
   <body>
     <noscript>
