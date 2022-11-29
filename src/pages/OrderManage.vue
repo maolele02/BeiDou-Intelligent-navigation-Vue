@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2022-11-29 17:04:08
+ * @LastEditTime: 2022-11-29 22:50:05
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -9,7 +9,7 @@
 <template>
 <div>
     <div class="col-md-11 col-md-offset-3 top20">
-    <form class="form-inline">
+    <form class="form-inline query_form">
 
         <div class="form-group">
             <label for="search_tel">订单号</label>
@@ -100,6 +100,15 @@ export default {
 </script>
 
 <style scoped>
+.query_form > div{
+    margin-left: 20px;
+}
+.form-group > input{
+    margin-left: 6px;
+}
+/* .form-group > button{
+    margin-left: 6px;
+} */
 .mainBox{
     /* 设置阴影 */
     background-color: white;
