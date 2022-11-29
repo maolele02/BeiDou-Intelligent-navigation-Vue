@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-21 21:14:38
- * @LastEditTime: 2022-11-28 22:49:31
+ * @LastEditTime: 2022-11-29 13:16:53
  * @LastEditors: maolele02
  * @Description: Vuex的配置
  * @FilePath: \beidou\src\store\index.js
@@ -68,13 +68,45 @@ const mutations = {
     ADDR_STREET(state, value){
         state.addr_street = value
     },
-
+    // 配送预约界面根据所选经纬度显示的地理位置
     BEGIN_ADDR_STR(state, value){
         state.begin_addr_str = value
     },
     END_ADDR_STR(state, value){
         state.end_addr_str = value
-    }
+    },
+
+    S_ADDR_PR(state, value){
+        state.s_addr_pr = value
+    },
+    S_ADDR_CITY(state, value){
+        state.s_addr_city = value
+    },
+    S_ADDR_TOWN(state, value){
+        state.s_addr_town = value
+    },
+    S_ADDR_DISTRICT(state, value){
+        state.s_addr_district = value
+    },
+    S_ADDR_STREET(state, value){
+        state.s_addr_street = value
+    },
+
+    R_ADDR_PR(state, value){
+        state.r_addr_pr = value
+    },
+    R_ADDR_CITY(state, value){
+        state.r_addr_city = value
+    },
+    R_ADDR_TOWN(state, value){
+        state.r_addr_town = value
+    },
+    R_ADDR_DISTRICT(state, value){
+        state.r_addr_district = value
+    },
+    R_ADDR_STREET(state, value){
+        state.r_addr_street = value
+    },
 }
 // 准备state，用于存储数据
 const state = {
@@ -94,7 +126,19 @@ const state = {
     addr_street: null,
 
     begin_addr_str: '',
-    end_addr_str: ''
+    end_addr_str: '',
+
+    s_addr_pr: null,
+    s_addr_city: null,
+    s_addr_town: null,
+    s_addr_district: null,
+    s_addr_street: null,
+
+    r_addr_pr: null,
+    r_addr_city: null,
+    r_addr_town: null,
+    r_addr_district: null,
+    r_addr_street: null
 
 }
 

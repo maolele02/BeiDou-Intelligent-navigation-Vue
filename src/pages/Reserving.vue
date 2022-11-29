@@ -112,7 +112,19 @@ export default {
             remark: '',
 
             begin_lnglat: '',
-            end_lnglat: ''
+            end_lnglat: '',
+
+            s_addr_pr: null,
+            s_addr_city: null,
+            s_addr_town: null,
+            s_addr_district: null,
+            s_addr_street: null,
+
+            r_addr_pr: null,
+            r_addr_city: null,
+            r_addr_town: null,
+            r_addr_district: null,
+            r_addr_street: null
         }
       }
     },
@@ -140,6 +152,19 @@ export default {
             let regex = /\d+\.*\d*/
             this.order.begin_lnglat = store.state.begin_lnglat
             this.order.end_lnglat = store.state.end_lnglat
+
+            this.order.s_addr_pr = store.state.s_addr_pr;
+            this.order.s_addr_city = store.state.s_addr_city;
+            this.order.s_addr_town = store.state.s_addr_town;
+            this.order.s_addr_district = store.state.s_addr_district;
+            this.order.s_addr_street = store.state.s_addr_street;
+
+            this.order.r_addr_pr = store.state.r_addr_pr;
+            this.order.r_addr_city = store.state.r_addr_city;
+            this.order.r_addr_town = store.state.r_addr_town;
+            this.order.r_addr_district = store.state.r_addr_district;
+            this.order.r_addr_street = store.state.r_addr_street;
+
             if(
                 this.order.s_name == '' ||
                 this.order.s_tel == '' ||
@@ -153,6 +178,9 @@ export default {
             ){
                 alert('请将信息填写完毕后再提交！')
                 return;
+            }
+            else if(this.order.r_tel.length != 11||this.order.r_tel.length != 11){
+                alert('电话号码过长');
             }
             else if(!regex.test(this.order.item_weight)){
                 alert('物品重量填写不合法！')
@@ -168,7 +196,10 @@ export default {
             data: this.order
             }).then(res=> {
                 if(res.data.msg == '订单提交成功'){
-                    this.$router.push({path:'index/complete'})
+                    // this.$router.push({path:'index/complete'})
+                    alert('订单提交成功！')
+                    this.$router.push({path:'/index/delivery'})
+
                 }
                 if(res.data.msg == '订单提交失败'){
                     alert('订单提交失败，请重试！')
@@ -178,6 +209,9 @@ export default {
         regionChange (data) {
             // console.log(data)
         },
+        clearInput(){
+
+        }
 
     }
 }

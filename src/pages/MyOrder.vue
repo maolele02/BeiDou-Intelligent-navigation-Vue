@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-18 22:09:19
- * @LastEditTime: 2022-11-27 16:47:42
+ * @LastEditTime: 2022-11-29 14:33:23
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\MyOrder.vue
@@ -59,9 +59,10 @@ export default {
     },
     created(){
       // this.$axios.get("/hahceshi")
+      let uid = localStorage.getItem('uid')
       this.$axios({
       method: 'get',
-      url: 'http://localhost:5000/orders/1',
+      url: 'http://localhost:5000/orders/'+uid,
       //responseType: 'stream'
       }).then(res=> {
           let res_data = res.data.data;

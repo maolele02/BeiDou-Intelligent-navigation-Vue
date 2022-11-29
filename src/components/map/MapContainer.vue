@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-20 11:56:34
- * @LastEditTime: 2022-11-29 13:08:23
+ * @LastEditTime: 2022-11-29 14:31:15
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\map\MapContainer.vue
@@ -171,6 +171,16 @@ export default {
                         
                         store.commit('BEGIN_LNGLAT', '')
                         store.commit('END_LNGLAT', '')
+                        store.commit('S_ADDR_PR', null)
+                        store.commit('S_ADDR_CITY', null)
+                        store.commit('S_ADDR_TOWN', null)
+                        store.commit('S_ADDR_DISTRICT', null)
+                        store.commit('S_ADDR_STREET', null)
+                        store.commit('R_ADDR_PR', null)
+                        store.commit('R_ADDR_CITY', null)
+                        store.commit('R_ADDR_TOWN', null)
+                        store.commit('R_ADDR_DISTRICT', null)
+                        store.commit('R_ADDR_STREET', null)
                     }
                     
                 });
@@ -249,12 +259,23 @@ export default {
                     code: addr_str
                 }
             }).then(res=>{
+                let data = res.data.data
+                let regeocode = data.regeocode
                 if(flag == 1){
-                    store.commit('BEGIN_ADDR_STR', res.data.data.addr_str)
-                    //console.log('addr_str1 ok')
+                    store.commit('BEGIN_ADDR_STR', data.addr_str)
+                    store.commit('S_ADDR_PR', regeocode.pro)
+                    store.commit('S_ADDR_CITY', regeocode.city)
+                    store.commit('S_ADDR_TOWN', regeocode.dist)
+                    store.commit('S_ADDR_DISTRICT', regeocode.township)
+                    store.commit('S_ADDR_STREET', regeocode.street)
                 }
                 else if(flag == 2){
-                    store.commit('END_ADDR_STR', res.data.data.addr_str)
+                    store.commit('END_ADDR_STR', data.addr_str)
+                    store.commit('R_ADDR_PR', regeocode.pro)
+                    store.commit('R_ADDR_CITY', regeocode.city)
+                    store.commit('R_ADDR_TOWN', regeocode.dist)
+                    store.commit('R_ADDR_DISTRICT', regeocode.township)
+                    store.commit('R_ADDR_STREET', regeocode.street)
                 }
 
             })
