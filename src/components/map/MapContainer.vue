@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-20 11:56:34
- * @LastEditTime: 2022-11-28 17:23:18
+ * @LastEditTime: 2022-11-29 13:08:23
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\map\MapContainer.vue
@@ -131,6 +131,8 @@ export default {
                             title: '起点'
                         })
                         this.map.add(this.begin_marker)
+
+                        this.getAddrStr(begin_lnglat, 1)
                     }
                     else if(this. cnt == 2){
                         let end_lnglat = e.lnglat.getLng() + ',' + e.lnglat.getLat()
@@ -141,6 +143,7 @@ export default {
                             title: '终点'
                         })
                         this.map.add(this.end_marker)
+                        this.getAddrStr(end_lnglat, 2)
                         this.path_planning()
                         
 
@@ -230,13 +233,32 @@ export default {
             // polyline.show()
             // this.map.add(this.polyline)
             this.polyline.setMap(this.map)
-            console.log(this.pts)
-            let len = this.polyline.getLength()
-            let pt_arr = this.polyline.getPath()
-            console.log(this.polyline)
-            console.log('折线长度：'+ len)
-            console.log('点：'+ pt_arr)
-        }
+            // console.log(this.pts)
+            // let len = this.polyline.getLength()
+            // let pt_arr = this.polyline.getPath()
+            // console.log(this.polyline)
+            // console.log('折线长度：'+ len)
+            // console.log('点：'+ pt_arr)
+            }
+        },
+        getAddrStr(addr_str, flag){
+            this.$axios({
+                method: 'post',
+                url: 'http://localhost:5000/inverse_coding',
+                data: {
+                    code: addr_str
+                }
+            }).then(res=>{
+                if(flag == 1){
+                    store.commit('BEGIN_ADDR_STR', res.data.data.addr_str)
+                    //console.log('addr_str1 ok')
+                }
+                else if(flag == 2){
+                    store.commit('END_ADDR_STR', res.data.data.addr_str)
+                }
+
+            })
+            
         }
     }
 }

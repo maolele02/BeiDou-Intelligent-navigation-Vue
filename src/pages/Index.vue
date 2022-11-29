@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-20 22:50:56
- * @LastEditTime: 2022-11-23 21:36:21
+ * @LastEditTime: 2022-11-28 22:32:26
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Index.vue
@@ -11,7 +11,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <LeftMenu msg="Welcome to Your Vue.js App"/>
+        <LeftMenu :view="actor"/>
         <div class="col-md-10">
           <!--指定组件的呈现位置-->
           <router-view></router-view>
@@ -29,6 +29,17 @@ export default {
   name: 'Index',
   components: {
     LeftMenu
+  },
+  data(){
+    return{
+      actor: null
+    }
+  },
+  created(){
+      this.actor = store.state.actor
+    },
+  methods:{
+
   },
   // 进入该路由前执行
   beforeRouteEnter(to, from, next){
@@ -51,7 +62,7 @@ export default {
         method: 'get',
         url: url,
       }).then(res=> {
-          console.log('uid: '+uid)
+          //console.log('uid: '+uid)
           let username = res.data.data.username
           let name = res.data.data.name
           let tel = res.data.data.tel
@@ -61,10 +72,11 @@ export default {
           let addr_town = res.data.data.addr_town
           let addr_district = res.data.data.addr_district
           let addr_street = res.data.data.addr_street
-
-          console.log('begin')
+          let actor = res.data.data.actor
+          //localStorage.setItem('actor', actor)
           // 存vuex
           store.commit('TOKEN', token)
+          store.commit('ACTOR', actor)
           store.commit('UID', uid)
           store.commit('USERNAME', username)
           store.commit('NAME', name)
@@ -75,8 +87,8 @@ export default {
           store.commit('ADDR_TOWN', addr_town)
           store.commit('ADDR_DISTRICT', addr_district)
           store.commit('ADDR_STREET', addr_street)
-          console.log('end')
-          next();  // 放行
+          //console.log('end')
+          next()
       }).catch(reason => {
         console.log('index false')
         return next({

@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-21 21:14:38
- * @LastEditTime: 2022-11-25 14:53:37
+ * @LastEditTime: 2022-11-28 22:49:31
  * @LastEditors: maolele02
  * @Description: Vuex的配置
  * @FilePath: \beidou\src\store\index.js
@@ -28,6 +28,9 @@ const mutations = {
     TOKEN(state, value){
         console.log('token store ')
         state.token = value
+    },
+    ACTOR(state, value){
+        state.actor = value;
     },
     UID(state, value){
         state.uid = value
@@ -64,12 +67,20 @@ const mutations = {
     },
     ADDR_STREET(state, value){
         state.addr_street = value
+    },
+
+    BEGIN_ADDR_STR(state, value){
+        state.begin_addr_str = value
+    },
+    END_ADDR_STR(state, value){
+        state.end_addr_str = value
     }
 }
 // 准备state，用于存储数据
 const state = {
     token: null,
     uid: null,
+    actor: null,
     username: null,
     name: null,
     begin_lnglat: '',
@@ -80,7 +91,11 @@ const state = {
     addr_city: null,
     addr_town: null,
     addr_district: null,
-    addr_street: null
+    addr_street: null,
+
+    begin_addr_str: '',
+    end_addr_str: ''
+
 }
 
 

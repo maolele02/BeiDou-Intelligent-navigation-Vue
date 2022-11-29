@@ -34,6 +34,18 @@
                         </div>
                     </div>
 
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-2">起点地址:</div>
+                        <div class="col-md-4">
+                            <span>{{$store.state.begin_addr_str}}</span>
+                        </div>
+                        <div class="col-md-2">终点地址:</div>
+                        <div class="col-md-4">
+                            <span>{{$store.state.end_addr_str}}</span>
+                        </div>
+                    </div>
+
                     <br />
                     <div class="row">
                         <div class="col-md-2">物品数量:</div>
@@ -165,7 +177,8 @@ export default {
         },
         regionChange (data) {
             // console.log(data)
-        }
+        },
+
     }
 }
 </script>
