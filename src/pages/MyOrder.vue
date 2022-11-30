@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-18 22:09:19
- * @LastEditTime: 2022-11-29 14:33:23
+ * @LastEditTime: 2022-11-30 21:59:20
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\MyOrder.vue
@@ -33,8 +33,8 @@
                     <tr class="active v-cloak" v-for="order in orders" :key="order.order_id">
                         <td>{{order.order_id}}</td>
                         <th>{{order.order_time}}</th>
-                        <td>{{order.s_addr_pro}}{{order.s_addr_city}}{{order.s_addr_district}}{{order.s_addr_street}}</td>
-                        <td>{{order.r_addr_pro}}{{order.r_addr_city}}{{order.r_addr_district}}{{order.r_addr_street}}</td>
+                        <td>{{order.s_addr_pr}}{{order.s_addr_city}}{{order.s_addr_district}}{{order.s_addr_street}}</td>
+                        <td>{{order.r_addr_pr}}{{order.r_addr_city}}{{order.r_addr_district}}{{order.r_addr_street}}</td>
                         <td>{{order.s_name}}</td>
                         <td>{{order.r_name}}</td>
                         <td>{{order.item_type}}</td>

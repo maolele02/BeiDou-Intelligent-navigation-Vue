@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-20 22:08:13
- * @LastEditTime: 2022-11-21 21:33:19
+ * @LastEditTime: 2022-11-30 22:02:16
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\main.js
@@ -19,6 +19,7 @@ import axios from 'axios'
 // import plugins from '/plugins'  // 导入插件
 
 Vue.config.productionTip = false
+// Vue.config.devtools = true;
 // 全局挂载axios
 Vue.prototype.$axios = axios
 // 应用过VueRouter插件

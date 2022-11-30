@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2022-11-30 19:55:43
+ * @LastEditTime: 2022-11-30 21:51:27
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -107,7 +107,6 @@ export default {
             })
         },
         order_query(){
-            this.orders = null
             let _state
             switch(this.state){
                 case '等待审核': _state = 0;break;
