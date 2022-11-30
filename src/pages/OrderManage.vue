@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2022-11-29 22:50:05
+ * @LastEditTime: 2022-11-30 19:55:43
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -44,17 +44,31 @@
         <th>收件人</th>
         <th>物品类型</th>
         <th>配送状态</th>
+        <th>操作1</th>
+        <th>操作2</th>
         </tr>
 
         <template v-if="orders != null">
             <tr class="active v-cloak" v-for="order in orders" :key="order.order_id">
-                <td><button class="btn btn-link">{{order.order_id}}</button></td>
+                <td>{{order.order_id}}</td>
                 <td>{{order.s_addr_pr}}{{order.s_addr_city}}{{order.s_addr_district}}{{order.s_addr_street}}</td>
                 <td>{{order.r_addr_pr}}{{order.r_addr_city}}{{order.r_addr_district}}{{order.r_addr_street}}</td>
                 <td>{{order.s_name}}</td>
                 <td>{{order.r_name}}</td>
                 <td>{{order.item_type}}</td>
                 <td>{{order.state}}</td>
+                <template v-if="order.state == '等待审核'">
+                    <td><button class="btn btn-success" @click="pass(order.order_id)">通过</button></td>
+                    <td><button class="btn btn-warning">不通过</button></td>
+                </template>
+                <template v-if="order.state == '等待配送'">
+                    <td>无</td>
+                    <td>无</td>
+                </template>
+                <template v-if="order.state != '等待审核' && order.state != '等待配送'">
+                    <td><button class="btn btn-success">监控</button></td>
+                    <td>无</td>
+                </template>
             </tr>
         </template>
         
@@ -78,19 +92,65 @@ export default {
         }
     },
     methods:{
+        pass(oid){
+            this.$axios({
+                method: 'get',
+                url: 'http://localhost:5000/order/pass/'+oid,
+            }).then(res=>{
+                if(res.data.msg == '操作成功'){
+                    this.order_query()
+                }
+                if(res.data.msg == '操作失败'){
+                    alert('操作失败，请重试！')
+                }
+                
+            })
+        },
         order_query(){
             this.orders = null
+            let _state
+            switch(this.state){
+                case '等待审核': _state = 0;break;
+                case '等待配送': _state = 1;break;
+                case '正在前往起点': _state = 2;break;
+                case '正在等待装货': _state = 3;break;
+                case '正在前往终点': _state = 4;break;
+                case '等待收货': _state = 5;break;
+            }
             this.$axios({
                 method: 'post',
                 url: 'http://localhost:5000/order/query',
                 data: {
                     order_id: this.order_id,
                     username: this.username,
-                    state: this.state
+                    state: _state
                 }
             }).then(res=>{
                 if(res.data.msg == '查询到结果'){
-                    this.orders = res.data.data
+                    // this.orders = res.data.data
+                    let res_data = res.data.data
+                    for(let i=0; i<res_data.length; i++){
+                        if(res_data[i].state == 0){
+                            res_data[i].state = '等待审核';
+                        }
+                        if(res_data[i].state == 1){
+                            res_data[i].state = '等待配送';
+                        }
+                        if(res_data[i].state == 2){
+                            res_data[i].state = '正在前往起点';
+                        }
+                        if(res_data[i].state == 3){
+                            res_data[i].state = '正在等待装货';
+                        }
+                        if(res_data[i].state == 4){
+                            res_data[i].state = '正在前往终点';
+                        }
+                        if(res_data[i].state == 5){
+                            res_data[i].state = '等待收货';
+                        }
+                        this.orders = res_data;
+                    }
+                    
                 }
                 
             })
@@ -155,5 +215,23 @@ margin: 0px;
 .top_input{
     position: relative;
     left: -75px;
+}
+th{
+    width: 400px;
+
+    margin: 0 auto;
+
+    /* border: medium solid red; */
+
+    border-spacing: 20px;
+
+    border-collapse: separate;
+
+    text-align: left;
+}
+td{
+    /* border: thin solid rgb(71, 71, 71); */
+    border-radius: 6px;
+    padding: 16px;
 }
 </style>

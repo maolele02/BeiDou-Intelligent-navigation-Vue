@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:38:19
- * @LastEditTime: 2022-11-29 22:49:51
+ * @LastEditTime: 2022-11-30 20:01:29
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\UserManage.vue
@@ -48,7 +48,9 @@
                     <th>昵称</th>
                     <th>电话号码</th>
                     <th>电子邮箱</th>
-                    <th>地址</th>
+                    <th>用户类别</th>
+                    <th>操作</th>
+                    <!-- <th>地址</th> -->
                     </tr>
 
                     <template v-if="users != null">
@@ -58,7 +60,13 @@
                             <td>{{user.name}}</td>
                             <td>{{user.tel}}</td>
                             <td>{{user.mail}}</td>
-                            <td>{{user.addr_pr}}{{user.addr_city}}{{user.addr_district}}{{user.addr_street}}</td>
+                            <td>{{user.actor}}</td>
+                            <template v-if="user.actor == '普通用户'">
+                                <td><button @click="set_admin(user.uid)" class="btn btn-info">设为管理员</button></td>
+                            </template>
+                            <template v-if="user.actor == '管理员'">
+                                <td><button class="btn btn-info" disabled="disabled">设为管理员</button></td>
+                            </template>
                         </tr>
                     </template>
                     
@@ -83,15 +91,45 @@ export default {
         }
     },
     methods:{
+        set_admin(uid){
+            this.$axios({
+                method: 'get',
+                url: 'http://localhost:5000/user/setadmin/'+uid,
+            }).then(res=>{
+                if(res.data.msg == '操作成功'){
+                    this.user_query()
+                }
+                if(res.data.msg == '操作失败'){
+                    alert('操作失败，请重试！')
+                }
+            })
+            user_query()
+        },
         user_query(){
             this.$axios({
                 method: 'post',
                 url: 'http://localhost:5000/user/query',
                 data: {
-                    order_id: this.order_id,
+                    uid: this.uid,
                     username: this.username,
-                    state: this.state
+                    tel: this.tel,
+                    mail: this.mail
                 }
+            }).then(res=>{
+                if(res.data.msg == '用户列表'){
+                    let res_data = res.data.data
+                    for(let i=0; i<res_data.length; i++){
+                        console.log(res_data[i].tel)
+                        if(res_data[i].actor == 0){
+                            res_data[i].actor = '普通用户';
+                        }
+                        if(res_data[i].actor == 1){
+                            res_data[i].actor = '管理员';
+                        }
+                    }
+                    this.users = res_data;
+                }
+                
             })
         }
     }
@@ -151,5 +189,23 @@ margin: 0px;
 .top_input{
     position: relative;
     left: -75px;
+}
+th{
+    width: 400px;
+
+    margin: 0 auto;
+
+    /* border: medium solid red; */
+
+    border-spacing: 20px;
+
+    border-collapse: separate;
+
+    text-align: left;
+}
+td{
+    /* border: thin solid rgb(71, 71, 71); */
+    border-radius: 6px;
+    padding: 16px;
 }
 </style>

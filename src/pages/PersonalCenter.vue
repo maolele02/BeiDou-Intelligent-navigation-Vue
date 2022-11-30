@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12 col-md-offset-1 userInfo">
                         <div class="row">
                             <div class="col-md-12"><b>地址：</b></div>
@@ -99,7 +99,7 @@
                     <div class="col-md-12">
                         <hr class="info_hr">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row userInfo">
                     <div class="col-md-1 col-md-offset-3">
