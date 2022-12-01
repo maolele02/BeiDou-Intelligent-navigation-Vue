@@ -1,36 +1,47 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2022-11-30 21:51:27
+ * @LastEditTime: 2022-12-01 22:11:29
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
 -->
 <template>
 <div>
-    <div class="col-md-11 col-md-offset-3 top20">
-    <form class="form-inline query_form">
+    <div class="col-md-11 col-md-offset-3 top20" id="order_search_box">
+        <form class="form-inline query_form">
 
-        <div class="form-group">
-            <label for="search_tel">订单号</label>
-            <input type="text" class="form-control" v-model="order_id">
-        </div>
+            <div class="form-group">
+                <label for="search_tel">订单号</label>
+                <input type="text" class="form-control" v-model="order_id">
+            </div>
 
-        <div class="form-group">
-            <label for="search_order_id">用户名</label>
-            <input type="text" class="form-control" v-model="username">
-        </div>
-        
-        <div class="form-group">
-            <label for="search_order_id">订单状态</label>
-            <input type="text" class="form-control" v-model="state">
-        </div>
+            <div class="form-group">
+                <label for="search_order_id">用户名</label>
+                <input type="text" class="form-control" v-model="username">
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="search_order_id">订单状态</label>
+                <input type="text" class="form-control" v-model="state">
+            </div> -->
 
-        <div class="form-group">
-            <button class="btn btn-default" @click="order_query">查询</button>
-        </div>
-    </form>
-</div>
+            <select class="form-control" v-model="state">
+                <option>请选择订单状态</option>
+                <option>等待审核</option>
+                <option>等待配送</option>
+                <option>正在前往起点</option>
+                <option>正在等待装货</option>
+                <option>正在前往终点</option>
+                <option>等待收货</option>
+            </select>
+
+
+            <div class="form-group">
+                <button class="btn btn-default" @click="order_query">查询</button>
+            </div>
+        </form>
+    </div>
 <br/>
 <div class="row">
 <div class="col-md-10  col-md-offset-1 mainBox top20">
@@ -66,7 +77,11 @@
                     <td>无</td>
                 </template>
                 <template v-if="order.state != '等待审核' && order.state != '等待配送'">
-                    <td><button class="btn btn-success">监控</button></td>
+                    <td>
+                        <button class="btn btn-info">
+                            <router-link to="/index/monitor" id="moni_btn">监控</router-link>
+                        </button>    
+                    </td>
                     <td>无</td>
                 </template>
             </tr>
@@ -86,7 +101,7 @@ export default {
         return{
             order_id: '',
             username: '',
-            state: '',
+            state: '请选择订单状态',
 
             orders: null
         }
@@ -151,6 +166,9 @@ export default {
                     }
                     
                 }
+                else if(res.data.msg == '未查询到结果'){
+                    this.orders = null  // 清空之前的查询结果
+                }
                 
             })
         }
@@ -159,10 +177,16 @@ export default {
 </script>
 
 <style scoped>
+#order_search_box{
+    margin-left: 290px;
+}
 .query_form > div{
     margin-left: 20px;
 }
-.form-group > input{
+.query_form > select{
+    margin-left: 20px;
+}
+.form-group > *{
     margin-left: 6px;
 }
 /* .form-group > button{
@@ -233,4 +257,7 @@ td{
     border-radius: 6px;
     padding: 16px;
 }
+/* #moni_btn{
+    
+} */
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-20 11:56:34
- * @LastEditTime: 2022-11-29 14:31:15
+ * @LastEditTime: 2022-12-01 21:20:52
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\map\MapContainer.vue
@@ -36,7 +36,6 @@ export default {
     name: 'MapContainer',
     mounted(){
         this.initMap()
-        console.log('ok')
     },
     data() {
         return {

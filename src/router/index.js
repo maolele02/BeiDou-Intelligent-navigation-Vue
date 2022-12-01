@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-18 22:04:40
- * @LastEditTime: 2022-11-29 15:46:06
+ * @LastEditTime: 2022-12-01 21:43:21
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\router\index.js
@@ -17,6 +17,7 @@ import Reserving from '../pages/Reserving';
 import OrderComplete from '../pages/OrderComplete';
 import OrderManage from '../pages/OrderManage';
 import UserManage from '../pages/UserManage';
+import Monitor from '../pages/Monitor';
 
 // 创建路由
 const router = new VueRouter({
@@ -71,6 +72,11 @@ const router = new VueRouter({
                     name: 'usermanage',
                     path: 'usermanage',
                     component: UserManage
+                },
+                {
+                    name: 'monitor',
+                    path: 'monitor',
+                    component: Monitor
                 }
               ]
         }
