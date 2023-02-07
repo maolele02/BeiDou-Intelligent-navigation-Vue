@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-20 22:08:13
- * @LastEditTime: 2022-11-30 22:02:16
+ * @LastEditTime: 2023-02-07 20:29:22
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\main.js
@@ -15,7 +15,7 @@ import router from './router/index.js'
 import store from './store/index.js'
 import 'bootstrap/dist/css/bootstrap.css'  // 导入bootstrap.css样式(从node_modules目录下开始找)
 import axios from 'axios'
-
+//import VideoPlayer from 'vue-video-player'
 // import plugins from '/plugins'  // 导入插件
 
 Vue.config.productionTip = false
@@ -28,6 +28,15 @@ Vue.use(VueRouter)
 Vue.use(Region)
 // 应用Cookie插件
 Vue.use(VueCookies)
+
+// import VueVideoPlayer from 'vue-video-player'
+// import 'video.js/dist/video-js.css'
+// import 'vue-video-player/src/custom-theme.css'
+// import 'videojs-flash'
+// import 'videojs-contrib-hls/dist/videojs-contrib-hls'
+
+// videojs.options.flash.swf = "./video-js.swf";
+// Vue.use(VueVideoPlayer)
 
 
 new Vue({

@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2022-12-01 22:11:29
+ * @LastEditTime: 2023-01-29 12:46:22
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -161,6 +161,9 @@ export default {
                         }
                         if(res_data[i].state == 5){
                             res_data[i].state = '等待收货';
+                        }
+                        else{
+                            res_data[i].state = '配送车遇到异常状况';
                         }
                         this.orders = res_data;
                     }

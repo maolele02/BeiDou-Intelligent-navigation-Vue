@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2022-12-01 22:43:35
+ * @LastEditTime: 2023-02-07 17:33:48
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -22,13 +22,15 @@
                 <div class="row" v-show="view == 1">
                     <div class="col-md-12 Box monitor_map marginTop30">
 
-                        <video muted autoplay="true" controlsList='nofullscreen nodownload noremote footbar' width="760" style="margin-top: 28px;">
-                            <!-- <source  src="./video/v1.mp4" type="video/mp4" />
+                        <!-- <video muted autoplay="true" controlsList='nofullscreen nodownload noremote footbar' width="760" style="margin-top: 28px;">
+                            <source  src="./video/v1.mp4" type="video/mp4" />
                             <object data="./video/v1.mp4" width="320" height="240">
                             <embed src="./video/Sail-Away.swf" width="320" height="240" />
                                 你的浏览器不支持该视频格式。 Your browser does not support this video format.
-                            </object> -->
-                        </video>
+                            </object>
+                        </video> -->
+
+                        <MonitorVideo></MonitorVideo>
 
                     </div>
                 </div>
@@ -137,17 +139,23 @@
 
 <script>
 import MonitorMap from '../components/map/MonitorMap.vue'
+import MonitorVideo from '../components/video/MonitorVideo.vue'
 export default {
     name: 'Monitor',
     components: {
-        MonitorMap
+        MonitorMap,
+        MonitorVideo
   },
     data(){
         return{
-            nowX: '116.395577',
-            nowY: '39.892257',
+            nowX: '112.862636',//112.862636,27.883359
+            nowY: '27.883359',
             view: 1,
             NowPosition: 'null',
+            NowHum: null,
+            NowTemp: null,
+
+
             fakeTemp: '',
             fakeHum: '',
             fakeTempList: ['21.21','21.22','21.23', '21.24', '20.25', '21.04', '21.12', '20.31','20.32','20.26'],

@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-20 11:56:34
- * @LastEditTime: 2022-12-01 22:43:03
+ * @LastEditTime: 2023-01-28 13:29:52
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\map\MonitorMap.vue
@@ -28,14 +28,12 @@ export default {
             type: String,
       	    required: true
         }
-  },
-    mounted(){
-        this.initMap()
     },
-    created(){
+    mounted(){
         let xx = parseFloat(this.x)
         let yy = parseFloat(this.y)
         this.point = [xx, yy]
+        this.initMap(this.point)
     },
     data() {
         return {
@@ -45,7 +43,7 @@ export default {
         }
     },
     methods : {
-        initMap() {
+        initMap(pt) {
             AMapLoader.load({
                 "key": "5fc326e248f57051d25fd0c2e26e8a86", 
                 "version": "2.0",
@@ -55,14 +53,14 @@ export default {
                 this.map = new AMap.Map('container',{
                     viewMode : "2D", 
                     zoom : 13,
-                    center : [116.395577, 39.892257],  // [116.395577, 39.892257]
+                    center : pt,  // [116.395577, 39.892257]
                     resizeEnable: true
                 });
 
                 // this.map.addControl(new AMap.MapType())
 
                 this.marker = new AMap.Marker({
-                    position: [116.395577, 39.892257],
+                    position: pt,
                     title: '当前位置'
                 })
                 this.map.add(this.marker)
