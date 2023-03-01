@@ -1,0 +1,28 @@
+"filename", "language", "JavaScript", "Vue", "Markdown", "JSON", "JSON with Comments", "HTML", "comment", "blank", "total"
+"g:\my_html5\BeiDou_Vue\beidou\README.md", "Markdown", 0, 0, 6, 0, 0, 0, 0, 2, 8
+"g:\my_html5\BeiDou_Vue\beidou\babel.config.js", "JavaScript", 5, 0, 0, 0, 0, 0, 0, 1, 6
+"g:\my_html5\BeiDou_Vue\beidou\jsconfig.json", "JSON with Comments", 0, 0, 0, 0, 8, 0, 12, 0, 20
+"g:\my_html5\BeiDou_Vue\beidou\package-lock.json", "JSON", 0, 0, 0, 19778, 0, 0, 0, 1, 19779
+"g:\my_html5\BeiDou_Vue\beidou\package.json", "JSON", 0, 0, 0, 52, 0, 0, 0, 1, 53
+"g:\my_html5\BeiDou_Vue\beidou\public\index.html", "HTML", 0, 0, 0, 0, 0, 26, 9, 1, 36
+"g:\my_html5\BeiDou_Vue\beidou\src\App.vue", "Vue", 0, 42, 0, 0, 0, 0, 1, 7, 50
+"g:\my_html5\BeiDou_Vue\beidou\src\components\LeftMenu.vue", "Vue", 0, 49, 0, 0, 0, 0, 0, 4, 53
+"g:\my_html5\BeiDou_Vue\beidou\src\components\map\MapContainer.vue", "Vue", 0, 221, 0, 0, 0, 0, 51, 23, 295
+"g:\my_html5\BeiDou_Vue\beidou\src\components\map\MonitorMap.vue", "Vue", 0, 75, 0, 0, 0, 0, 3, 5, 83
+"g:\my_html5\BeiDou_Vue\beidou\src\components\video\MonitorVideo.vue", "Vue", 0, 72, 0, 0, 0, 0, 53, 4, 129
+"g:\my_html5\BeiDou_Vue\beidou\src\main.js", "JavaScript", 20, 0, 0, 0, 0, 0, 22, 6, 48
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\Index.vue", "Vue", 0, 92, 0, 0, 0, 0, 6, 6, 104
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\Login.vue", "Vue", 0, 146, 0, 0, 0, 0, 4, 19, 169
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\Monitor.vue", "Vue", 0, 208, 0, 0, 0, 0, 3, 25, 236
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\MyOrder.vue", "Vue", 0, 99, 0, 0, 0, 0, 5, 7, 111
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\OrderComplete.vue", "Vue", 0, 23, 0, 0, 0, 0, 0, 4, 27
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\OrderManage.vue", "Vue", 0, 229, 0, 0, 0, 0, 11, 26, 266
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\PersonalCenter.vue", "Vue", 0, 150, 0, 0, 0, 0, 1, 17, 168
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\Register.vue", "Vue", 0, 259, 0, 0, 0, 0, 5, 24, 288
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\Reserving.vue", "Vue", 0, 211, 0, 0, 0, 0, 2, 21, 234
+"g:\my_html5\BeiDou_Vue\beidou\src\pages\UserManage.vue", "Vue", 0, 183, 0, 0, 0, 0, 4, 24, 211
+"g:\my_html5\BeiDou_Vue\beidou\src\plugins.js", "JavaScript", 4, 0, 0, 0, 0, 0, 2, 0, 6
+"g:\my_html5\BeiDou_Vue\beidou\src\router\index.js", "JavaScript", 73, 0, 0, 0, 0, 0, 23, 4, 100
+"g:\my_html5\BeiDou_Vue\beidou\src\store\index.js", "JavaScript", 119, 0, 0, 0, 0, 0, 24, 13, 156
+"g:\my_html5\BeiDou_Vue\beidou\vue.config.js", "JavaScript", 20, 0, 0, 0, 0, 0, 29, 5, 54
+"Total", "-", 241, 2059, 6, 19830, 8, 26, 270, 250, 22690

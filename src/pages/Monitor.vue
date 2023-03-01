@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2023-02-07 17:33:48
+ * @LastEditTime: 2023-03-01 22:26:36
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -53,19 +53,19 @@
             
                             <div class="row">
                                 <div class="col-md-3">
-                                    <button class="btn btn-primary controllBtn marginTop10">左</button>
+                                    <button class="btn btn-primary controllBtn marginTop10" @click="control('left')">左</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button class="btn btn-warning controllBtn marginTop10">鸣笛</button>
+                                    <button class="btn btn-warning controllBtn marginTop10" @click="control('beep')">鸣笛</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button class="btn btn-primary controllBtn marginTop10">右</button>
+                                    <button class="btn btn-primary controllBtn marginTop10" @click="control('right')">右</button>
                                 </div>
                             </div>
             
                             <div class="row">
                                 <div class="col-md-3 col-md-offset-3">
-                                    <button class="btn btn-primary controllBtn marginTop10">后</button>
+                                    <button class="btn btn-primary controllBtn marginTop10" @click="control('back')">后</button>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
     
                         <div class="col-md-4 col-md-offset-1">
                             <div class="marginTop65">
-                                <button class="btn btn-warning controllBtn">刹车</button>
+                                <button class="btn btn-warning controllBtn" @click="control('off')">刹车</button>
                             </div>
                         </div> 
                             </div>
@@ -87,15 +87,21 @@
                 <!--温湿度显示-->
                 <div class="row Box">
                     <div class="col-md-12">
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-6">
-                                <b>当前温度：</b><span v-show="fakeTemp != ''">{{showFakeTemp()}}&deg;</span>
+                                <b>当前经纬度：</b><span v-show="nowTemp != ''">{{showPos()}}&deg;</span>
                             </div>
                         </div>
 
                         <div class="row marginTop30">
                             <div class="col-md-6">
-                                <b>当前湿度：</b><span v-show="fakeHum != ''">{{showFakeHum()}}%</span>
+                                <b>当前温度：</b><span v-show="nowTemp != ''">{{showTemp()}}&deg;</span>
+                            </div>
+                        </div>
+
+                        <div class="row marginTop30">
+                            <div class="col-md-6">
+                                <b>当前湿度：</b><span v-show="nowHum != ''">{{showHum()}}%</span>
                             </div>
                         </div>
                     </div>
@@ -106,13 +112,13 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <b>物流状态：</b><span>正常</span>
+                                <b>物流状态：</b><span>{{showCarState()}}</span>
                             </div>
                         </div>
 
                         <div class="row marginTop30">
                             <div class="col-md-6">
-                                <b>运送车牌号：</b><span>11230</span>
+                                <b>运送车牌号：</b><span :v-if="carNum != null">{{showCarNum()}}</span>
                             </div>
                         </div>
                     </div>
@@ -121,7 +127,7 @@
                 <!--当前位置显示-->
                 <div class="row Box marginTop30" >
                     <div class="col-md-12">
-                        <span style="display: block; height: 35px;"><b>当前位置：</b>湖南省永州市零陵区杨梓塘路123号</span>
+                        <span style="display: block;"><b>当前位置：</b>{{showLoc()}}</span>
                     </div>
                 </div>
 
@@ -148,12 +154,18 @@ export default {
   },
     data(){
         return{
+            oid: 1,
+            cid: 1,
             nowX: '112.862636',//112.862636,27.883359
             nowY: '27.883359',
             view: 1,
-            NowPosition: 'null',
-            NowHum: null,
-            NowTemp: null,
+            nowPosition: 'null',
+            nowLoc: '',
+            nowHum: null,
+            nowTemp: null,
+            carState: '',
+            carNum: null,
+
 
 
             fakeTemp: '',
@@ -165,37 +177,124 @@ export default {
     },
     methods:{
         getNowPointer(){
-
+            if(this.oid == null){
+                return;
+            }
+            this.$axios({
+                method: 'get',
+                url: 'http://localhost:5000/position/'+this.oid,
+            }).then(res=>{
+                if(res.data.msg == '查询成功'){
+                    this.nowPosition = res.data.data.point;
+                    this.nowLoc = res.data.data.loc;
+                }
+                else if(res.data.msg == '查询失败'){
+                    console.log('查询失败，请重试！');
+                }
+            })
+        },
+        getItemState(){
+            if(this.oid == null){
+                return;
+            }
+            this.$axios({
+                method: 'get',
+                url: 'http://localhost:5000/state/'+this.oid,
+            }).then(res=>{
+                if(res.data.msg == '查询成功'){
+                    this.nowTemp = res.data.data.i_temp;
+                    this.nowHum = res.data.data.i_hum;
+                }
+                else if(res.data.msg == '查询失败'){
+                    console.log('操作失败，请重试！');
+                }
+            })
+        },
+        getCarData(){
+            if(this.cid == null){
+                return;
+            }
+            this.$axios({
+                method: 'get',
+                url: 'http://localhost:5000/car/'+this.cid,
+            }).then(res=>{
+                if(res.data.msg == '查询成功'){
+                    let state = res.data.data.car_state;
+                    if(state === 0){
+                        this.carState = '正常';
+                    }else{
+                        this.carState = '出现异常';
+                    }
+                    
+                    this.carNum = res.data.data.car_num;
+                }
+                else if(res.data.msg == '查询失败'){
+                    console.log('操作失败，请重试！');
+                }
+            })
         },
         ternView(event, num){
             this.view = num;
         },
         setFakeTemp(){
-            let num1 = Math.random()*10;
-            let num2 = Math.random()*10;
-            let index1 = Math.floor(num1);
-            let index2 = Math.floor(num2);
-            this.fakeTemp = this.fakeTempList[index1];
-            this.fakeHum = this.fakeHumList[index2];
+            this.getItemState();
+
+            // let num1 = Math.random()*10;
+            // let num2 = Math.random()*10;
+            // let index1 = Math.floor(num1);
+            // let index2 = Math.floor(num2);
+            // this.fakeTemp = this.fakeTempList[index1];
+            // this.fakeHum = this.fakeHumList[index2];
         },
-        showFakeTemp(){
-            return this.fakeTemp;
+        showTemp(){
+            return this.nowTemp;
         },
-        showFakeHum(){
-            return this.fakeHum;
+        showHum(){
+            return this.nowHum;
+        },
+        showPos(){
+            return this.nowPosition;
+        },
+        showCarState(){
+            return this.carState;
+        },
+        showCarNum(){
+            return this.carNum;
+        },
+        showLoc(){
+            return this.nowLoc;
+        },
+        control(controlData){
+            this.$axios({
+                method: 'post',
+                url: 'http://localhost:5000/control',
+                data:{
+                    oid: this.username,
+                    cid: this.pwd,
+                    control_data: controlData
+                }
+            }).then(res=>{
+                console.log(res.data.msg);
+            })
         }
     },
     created(){
-        this.timer = setInterval(() => {
-            this.setFakeTemp();
-            //console.log(this.fakeTemp);
-            //do something
-            //定时器的回调函数中需要注意 this 指向
-        }, 1000)
-        this.getNowPointer()
+        // this.timer = setInterval(() => {
+        //     this.getItemState();
+        //     this.getNowPointer();
+        //     //console.log(this.fakeTemp);
+        //     //do something
+        //     //定时器的回调函数中需要注意 this 指向
+        // }, 1000)
+        
+    },
+    mounted(){
+        this.getNowPointer();
+        this.getItemState();
+        this.getCarData();
     },
     beforeDestroy () {
-        clearInterval(this.timer)
+        // clearInterval(this.timer)
     },
 }
 </script>

@@ -1,0 +1,66 @@
+Date : 2023-02-23 21:34:54
+Directory : g:\my_html5\BeiDou_Vue\beidou
+Total : 26 files,  22170 codes, 270 comments, 250 blanks, all 22690 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          2 |     19,830 |          0 |          2 |     19,832 |
+| Vue                |         15 |      2,059 |        149 |        216 |      2,424 |
+| JavaScript         |          6 |        241 |        100 |         29 |        370 |
+| HTML               |          1 |         26 |          9 |          1 |         36 |
+| JSON with Comments |          1 |          8 |         12 |          0 |         20 |
+| Markdown           |          1 |          6 |          0 |          2 |          8 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                   |         26 |     22,170 |        270 |        250 |     22,690 |
+| . (Files)                                                           |          6 |     19,869 |         41 |         10 |     19,920 |
+| public                                                              |          1 |         26 |          9 |          1 |         36 |
+| src                                                                 |         19 |      2,275 |        220 |        239 |      2,734 |
+| src (Files)                                                         |          3 |         66 |         25 |         13 |        104 |
+| src\components                                                      |          4 |        417 |        107 |         36 |        560 |
+| src\components (Files)                                              |          1 |         49 |          0 |          4 |         53 |
+| src\components\map                                                  |          2 |        296 |         54 |         28 |        378 |
+| src\components\video                                                |          1 |         72 |         53 |          4 |        129 |
+| src\pages                                                           |         10 |      1,600 |         41 |        173 |      1,814 |
+| src\router                                                          |          1 |         73 |         23 |          4 |        100 |
+| src\store                                                           |          1 |        119 |         24 |         13 |        156 |
++---------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                            | language           | code       | comment    | blank      | total      |
++---------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| g:\my_html5\BeiDou_Vue\beidou\README.md                             | Markdown           |          6 |          0 |          2 |          8 |
+| g:\my_html5\BeiDou_Vue\beidou\babel.config.js                       | JavaScript         |          5 |          0 |          1 |          6 |
+| g:\my_html5\BeiDou_Vue\beidou\jsconfig.json                         | JSON with Comments |          8 |         12 |          0 |         20 |
+| g:\my_html5\BeiDou_Vue\beidou\package-lock.json                     | JSON               |     19,778 |          0 |          1 |     19,779 |
+| g:\my_html5\BeiDou_Vue\beidou\package.json                          | JSON               |         52 |          0 |          1 |         53 |
+| g:\my_html5\BeiDou_Vue\beidou\public\index.html                     | HTML               |         26 |          9 |          1 |         36 |
+| g:\my_html5\BeiDou_Vue\beidou\src\App.vue                           | Vue                |         42 |          1 |          7 |         50 |
+| g:\my_html5\BeiDou_Vue\beidou\src\components\LeftMenu.vue           | Vue                |         49 |          0 |          4 |         53 |
+| g:\my_html5\BeiDou_Vue\beidou\src\components\map\MapContainer.vue   | Vue                |        221 |         51 |         23 |        295 |
+| g:\my_html5\BeiDou_Vue\beidou\src\components\map\MonitorMap.vue     | Vue                |         75 |          3 |          5 |         83 |
+| g:\my_html5\BeiDou_Vue\beidou\src\components\video\MonitorVideo.vue | Vue                |         72 |         53 |          4 |        129 |
+| g:\my_html5\BeiDou_Vue\beidou\src\main.js                           | JavaScript         |         20 |         22 |          6 |         48 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\Index.vue                   | Vue                |         92 |          6 |          6 |        104 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\Login.vue                   | Vue                |        146 |          4 |         19 |        169 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\Monitor.vue                 | Vue                |        208 |          3 |         25 |        236 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\MyOrder.vue                 | Vue                |         99 |          5 |          7 |        111 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\OrderComplete.vue           | Vue                |         23 |          0 |          4 |         27 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\OrderManage.vue             | Vue                |        229 |         11 |         26 |        266 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\PersonalCenter.vue          | Vue                |        150 |          1 |         17 |        168 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\Register.vue                | Vue                |        259 |          5 |         24 |        288 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\Reserving.vue               | Vue                |        211 |          2 |         21 |        234 |
+| g:\my_html5\BeiDou_Vue\beidou\src\pages\UserManage.vue              | Vue                |        183 |          4 |         24 |        211 |
+| g:\my_html5\BeiDou_Vue\beidou\src\plugins.js                        | JavaScript         |          4 |          2 |          0 |          6 |
+| g:\my_html5\BeiDou_Vue\beidou\src\router\index.js                   | JavaScript         |         73 |         23 |          4 |        100 |
+| g:\my_html5\BeiDou_Vue\beidou\src\store\index.js                    | JavaScript         |        119 |         24 |         13 |        156 |
+| g:\my_html5\BeiDou_Vue\beidou\vue.config.js                         | JavaScript         |         20 |         29 |          5 |         54 |
+| Total                                                               |                    |     22,170 |        270 |        250 |     22,690 |
++---------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

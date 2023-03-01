@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2023-01-29 12:46:22
+ * @LastEditTime: 2023-03-01 21:35:59
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -144,22 +144,23 @@ export default {
                     // this.orders = res.data.data
                     let res_data = res.data.data
                     for(let i=0; i<res_data.length; i++){
+                        console.log(res_data[i].state)
                         if(res_data[i].state == 0){
                             res_data[i].state = '等待审核';
                         }
-                        if(res_data[i].state == 1){
+                        else if(res_data[i].state == 1){
                             res_data[i].state = '等待配送';
                         }
-                        if(res_data[i].state == 2){
+                        else if(res_data[i].state == 2){
                             res_data[i].state = '正在前往起点';
                         }
-                        if(res_data[i].state == 3){
+                        else if(res_data[i].state == 3){
                             res_data[i].state = '正在等待装货';
                         }
-                        if(res_data[i].state == 4){
+                        else if(res_data[i].state == 4){
                             res_data[i].state = '正在前往终点';
                         }
-                        if(res_data[i].state == 5){
+                        else if(res_data[i].state == 5){
                             res_data[i].state = '等待收货';
                         }
                         else{

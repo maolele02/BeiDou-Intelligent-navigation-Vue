@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-20 22:08:13
- * @LastEditTime: 2023-02-07 20:29:22
+ * @LastEditTime: 2023-02-28 21:35:23
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\main.js
@@ -28,6 +28,11 @@ Vue.use(VueRouter)
 Vue.use(Region)
 // 应用Cookie插件
 Vue.use(VueCookies)
+
+// Vue.use(new VueSocketIO({
+//   debug: true,
+//   connection: 'http://127.0.0.1:5001'  // dcenter对应于flask-sok
+// }))
 
 // import VueVideoPlayer from 'vue-video-player'
 // import 'video.js/dist/video-js.css'
