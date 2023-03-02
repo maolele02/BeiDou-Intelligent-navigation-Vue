@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2023-03-01 22:26:36
+ * @LastEditTime: 2023-03-02 16:13:36
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -14,12 +14,12 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn"  @click="ternView($event,1)">监控</button>
-                        <button class="btn map_btn"  @click="ternView($event,2)">地图</button>
+                        <button class="btn"  @click="ternView($event,1)">地图</button>
+                        <button class="btn moni_btn"  @click="ternView($event,2)">监控</button>
                     </div>
                 </div>
 
-                <div class="row" v-show="view == 1">
+                <div class="row" v-show="view == 2">
                     <div class="col-md-12 Box monitor_map marginTop30">
 
                         <!-- <video muted autoplay="true" controlsList='nofullscreen nodownload noremote footbar' width="760" style="margin-top: 28px;">
@@ -35,11 +35,11 @@
                     </div>
                 </div>
 
-                <div class="row" v-show="view == 2">
-                    <MonitorMap :x="nowX" :y="nowY"/>
+                <div class="row" v-show="view == 1">
+                    <MonitorMap :v-if="map_init_flag" class="moni_map" :x="nowX" :y="nowY"/>
                 </div>
 
-                    <div class="row Box marginTop30" v-show="view == 1">
+                    <div class="row Box marginTop30" v-show="view == 2">
                         <div class="col-md-12">
                             <div class="row">
                                 <!--前后左右控制按钮-->
@@ -89,19 +89,19 @@
                     <div class="col-md-12">
                         <div class="row ">
                             <div class="col-md-6">
-                                <b>当前经纬度：</b><span v-show="nowTemp != ''">{{showPos()}}&deg;</span>
+                                <b>当前经纬度：</b><span v-show="nowTemp != ''">{{nowPosition}}&deg;</span>
                             </div>
                         </div>
 
                         <div class="row marginTop30">
                             <div class="col-md-6">
-                                <b>当前温度：</b><span v-show="nowTemp != ''">{{showTemp()}}&deg;</span>
+                                <b>当前温度：</b><span v-show="nowTemp != ''">{{nowTemp}}&deg;</span>
                             </div>
                         </div>
 
                         <div class="row marginTop30">
                             <div class="col-md-6">
-                                <b>当前湿度：</b><span v-show="nowHum != ''">{{showHum()}}%</span>
+                                <b>当前湿度：</b><span v-show="nowHum != ''">{{nowHum}}%</span>
                             </div>
                         </div>
                     </div>
@@ -112,13 +112,13 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <b>物流状态：</b><span>{{showCarState()}}</span>
+                                <b>物流状态：</b><span>{{carState}}</span>
                             </div>
                         </div>
 
                         <div class="row marginTop30">
                             <div class="col-md-6">
-                                <b>运送车牌号：</b><span :v-if="carNum != null">{{showCarNum()}}</span>
+                                <b>运送车牌号：</b><span :v-if="carNum != null">{{carNum}}</span>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                 <!--当前位置显示-->
                 <div class="row Box marginTop30" >
                     <div class="col-md-12">
-                        <span style="display: block;"><b>当前位置：</b>{{showLoc()}}</span>
+                        <span style="display: block;"><b>当前位置：</b>{{nowLoc}}</span>
                     </div>
                 </div>
 
@@ -154,17 +154,18 @@ export default {
   },
     data(){
         return{
-            oid: 1,
-            cid: 1,
+            oid: '',
+            cid: '',
             nowX: '112.862636',//112.862636,27.883359
             nowY: '27.883359',
             view: 1,
             nowPosition: 'null',
             nowLoc: '',
-            nowHum: null,
-            nowTemp: null,
+            nowHum: '',
+            nowTemp: '',
             carState: '',
-            carNum: null,
+            carNum: '',
+            map_init_flag: false,
 
 
 
@@ -177,7 +178,7 @@ export default {
     },
     methods:{
         getNowPointer(){
-            if(this.oid == null){
+            if(this.oid == ''){
                 return;
             }
             this.$axios({
@@ -187,6 +188,7 @@ export default {
                 if(res.data.msg == '查询成功'){
                     this.nowPosition = res.data.data.point;
                     this.nowLoc = res.data.data.loc;
+                    this.cid = res.data.data.car_id;
                 }
                 else if(res.data.msg == '查询失败'){
                     console.log('查询失败，请重试！');
@@ -194,7 +196,7 @@ export default {
             })
         },
         getItemState(){
-            if(this.oid == null){
+            if(this.oid === ''){
                 return;
             }
             this.$axios({
@@ -210,8 +212,27 @@ export default {
                 }
             })
         },
+        getCarId(){
+            if(this.oid === ''){
+                return;
+            }
+            this.$axios({
+                method: 'get',
+                url: 'http://localhost:5000/order/car/'+this.oid,
+            }).then(res=>{
+                if(res.data.msg == '查询成功'){
+                    if(res.data.data != null)
+                        this.cid = res.data.data;
+                    this.getCarData();
+                }
+                else if(res.data.msg == '查询失败'){
+                    console.log('操作失败，请重试！');
+                }
+            })
+        },
         getCarData(){
-            if(this.cid == null){
+            if(this.cid === ''){
+                console.log('!!!')
                 return;
             }
             this.$axios({
@@ -219,50 +240,23 @@ export default {
                 url: 'http://localhost:5000/car/'+this.cid,
             }).then(res=>{
                 if(res.data.msg == '查询成功'){
-                    let state = res.data.data.car_state;
+                    let res_data = res.data.data
+                    let state = res_data.car_state;
                     if(state === 0){
                         this.carState = '正常';
                     }else{
                         this.carState = '出现异常';
                     }
                     
-                    this.carNum = res.data.data.car_num;
+                    this.carNum = res_data.car_num;
                 }
                 else if(res.data.msg == '查询失败'){
-                    console.log('操作失败，请重试！');
+                    console.log('查询失败，请重试！');
                 }
             })
         },
         ternView(event, num){
             this.view = num;
-        },
-        setFakeTemp(){
-            this.getItemState();
-
-            // let num1 = Math.random()*10;
-            // let num2 = Math.random()*10;
-            // let index1 = Math.floor(num1);
-            // let index2 = Math.floor(num2);
-            // this.fakeTemp = this.fakeTempList[index1];
-            // this.fakeHum = this.fakeHumList[index2];
-        },
-        showTemp(){
-            return this.nowTemp;
-        },
-        showHum(){
-            return this.nowHum;
-        },
-        showPos(){
-            return this.nowPosition;
-        },
-        showCarState(){
-            return this.carState;
-        },
-        showCarNum(){
-            return this.carNum;
-        },
-        showLoc(){
-            return this.nowLoc;
         },
         control(controlData){
             this.$axios({
@@ -279,23 +273,23 @@ export default {
         }
     },
     created(){
-        // this.timer = setInterval(() => {
-        //     this.getItemState();
-        //     this.getNowPointer();
-        //     //console.log(this.fakeTemp);
-        //     //do something
-        //     //定时器的回调函数中需要注意 this 指向
-        // }, 1000)
-        
     },
     mounted(){
+        this.oid = this.$route.query.oid;
+        console.log(this.$route.query.cpt)
+        let pos = this.$route.query.cpt.split(',');
+        this.nowX = pos[0];
+        this.nowY = pos[1];
+        this.nowPosition = this.nowX + this.nowY;
+        this.map_init_flag = true;
+
         this.getNowPointer();
         this.getItemState();
-        this.getCarData();
+        this.getCarId();
     },
-    beforeDestroy () {
-        // clearInterval(this.timer)
-    },
+    beforeDestroy(){
+
+    }
 }
 </script>
 
@@ -303,7 +297,7 @@ export default {
 #moni_container{
     margin-top: 35px;
 }
-.map_btn{
+.moni_btn{
     margin-left: 10px;
 }
 button.controllBtn{
@@ -332,4 +326,11 @@ button.controllBtn{
     height: 500px;
 }
 video::-webkit-media-controls-fullscreen-button{ display: none !important; }
+
+.moni_map{
+    padding:0px;
+    margin: 0px;
+    width: 100%;
+    height: 600px;
+}
 </style>

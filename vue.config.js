@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-20 22:08:13
- * @LastEditTime: 2023-02-07 20:11:37
+ * @LastEditTime: 2023-03-02 13:35:53
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\vue.config.js
@@ -17,6 +17,7 @@ module.exports = {
   indexPath: './templates/index.html',   // 打包后index的位置
   assetsDir: 'static/', // 静态资源目录（js, css, img）
   lintOnSave: false, // 是否开启eslint
+  // historyApiFallback: true,
   
   chainWebpack: config => {
     config.module

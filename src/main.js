@@ -1,7 +1,7 @@
 /*
  * @Author: maolele02
  * @Date: 2022-11-20 22:08:13
- * @LastEditTime: 2023-02-28 21:35:23
+ * @LastEditTime: 2023-03-02 13:08:25
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\main.js
@@ -29,11 +29,6 @@ Vue.use(Region)
 // 应用Cookie插件
 Vue.use(VueCookies)
 
-// Vue.use(new VueSocketIO({
-//   debug: true,
-//   connection: 'http://127.0.0.1:5001'  // dcenter对应于flask-sok
-// }))
-
 // import VueVideoPlayer from 'vue-video-player'
 // import 'video.js/dist/video-js.css'
 // import 'vue-video-player/src/custom-theme.css'
@@ -48,5 +43,8 @@ new Vue({
   render: h => h(App),
   router: router,  // 将router/index.js配置成router
   store: store,  // 因为键和值相同，可直接简写为store
-  Region: Region
+  Region: Region,
+  beforeCreate(){  // Vue的生命周期函数
+    Vue.prototype.$bus = this  // 设置全局事件总线(Vue的原型对象上有$on,$off,$emit方法，所有vc、vm可见)
+  }
 }).$mount('#app')

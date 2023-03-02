@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2023-03-01 21:35:59
+ * @LastEditTime: 2023-03-02 15:47:30
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -78,8 +78,8 @@
                 </template>
                 <template v-if="order.state != '等待审核' && order.state != '等待配送'">
                     <td>
-                        <button class="btn btn-info">
-                            <router-link to="/index/monitor" id="moni_btn">监控</router-link>
+                        <button class="btn btn-info" @click="turn_to_moni(order.order_id)">
+                            监控
                         </button>    
                     </td>
                     <td>无</td>
@@ -174,6 +174,22 @@ export default {
                     this.orders = null  // 清空之前的查询结果
                 }
                 
+            })
+        },
+        turn_to_moni(order_id){
+            let car_pt;
+            this.$axios({
+                method: 'get',
+                url: 'http://localhost:5000/position/' + order_id,
+            }).then(res=>{
+                car_pt = res.data.data.point;
+                this.$router.push({
+                    name: 'monitor',
+                    query:{
+                        oid: order_id,
+                        cpt: car_pt
+                    }
+                })
             })
         }
     }

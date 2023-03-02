@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-20 11:56:34
- * @LastEditTime: 2023-01-28 13:29:52
+ * @LastEditTime: 2023-03-02 16:14:12
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\map\MonitorMap.vue
@@ -28,6 +28,9 @@ export default {
             type: String,
       	    required: true
         }
+    },
+    created(){
+
     },
     mounted(){
         let xx = parseFloat(this.x)
