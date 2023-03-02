@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2023-03-02 16:13:36
+ * @LastEditTime: 2023-03-02 22:05:38
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="row" v-show="view == 1">
-                    <MonitorMap :v-if="map_init_flag" class="moni_map" :x="nowX" :y="nowY"/>
+                    <MonitorMap v-if="map_init_flag" class="marginTop30" :x="nowX" :y="nowY"/>
                 </div>
 
                     <div class="row Box marginTop30" v-show="view == 2">
@@ -47,7 +47,7 @@
                         
                             <div class="row">
                                 <div class="col-md-3 col-md-offset-3">
-                                    <button class=" btn btn-primary controllBtn marginTop10">前</button>
+                                    <button class=" btn btn-primary controllBtn marginTop10" @click="control('ahead')">前</button>
                                 </div>
                             </div>
             
@@ -166,13 +166,6 @@ export default {
             carState: '',
             carNum: '',
             map_init_flag: false,
-
-
-
-            fakeTemp: '',
-            fakeHum: '',
-            fakeTempList: ['21.21','21.22','21.23', '21.24', '20.25', '21.04', '21.12', '20.31','20.32','20.26'],
-            fakeHumList: ['67.12', '67.15', '67.13', '67.10', '67.21', '67.30', '67.41', '67.53', '67.28', '67.24'],
             timer: null,
         }
     },
@@ -263,12 +256,11 @@ export default {
                 method: 'post',
                 url: 'http://localhost:5000/control',
                 data:{
-                    oid: this.username,
-                    cid: this.pwd,
+                    cid: this.cid,
                     control_data: controlData
                 }
             }).then(res=>{
-                console.log(res.data.msg);
+                // console.log(res.data.msg);
             })
         }
     },
@@ -328,9 +320,6 @@ button.controllBtn{
 video::-webkit-media-controls-fullscreen-button{ display: none !important; }
 
 .moni_map{
-    padding:0px;
-    margin: 0px;
-    width: 100%;
-    height: 600px;
+    margin-top: 20px
 }
 </style>

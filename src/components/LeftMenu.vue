@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-28 21:56:38
- * @LastEditTime: 2023-02-28 20:22:50
+ * @LastEditTime: 2023-03-02 21:57:24
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\LeftMenu.vue
@@ -16,7 +16,7 @@
           <li><router-link active-class="active" to="/index/space">个人中心</router-link></li>
           <li><router-link v-if="view == 1" active-class="active" to="/index/ordermanage">订单管理</router-link></li>
           <li><router-link v-if="view == 1" active-class="active" to="/index/usermanage">用户管理</router-link></li>
-          <li><router-link v-if="view == 1" active-class="active" to="/test">test</router-link></li>
+          <!-- <li><router-link v-if="view == 1" active-class="active" to="/test">test</router-link></li> -->
       </ul>
     </div>
   </div>

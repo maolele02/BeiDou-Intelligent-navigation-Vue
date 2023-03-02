@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2023-03-02 15:47:30
+ * @LastEditTime: 2023-03-02 22:02:43
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -20,11 +20,6 @@
                 <label for="search_order_id">用户名</label>
                 <input type="text" class="form-control" v-model="username">
             </div>
-            
-            <!-- <div class="form-group">
-                <label for="search_order_id">订单状态</label>
-                <input type="text" class="form-control" v-model="state">
-            </div> -->
 
             <select class="form-control" v-model="state">
                 <option>请选择订单状态</option>
@@ -38,7 +33,7 @@
 
 
             <div class="form-group">
-                <button class="btn btn-default" @click="order_query">查询</button>
+                <button class="btn btn-default" @click.prevent="order_query">查询</button>
             </div>
         </form>
     </div>
@@ -122,8 +117,13 @@ export default {
             })
         },
         order_query(){
+            if(this.order_id == '' && this.username == '' && this.state == '请选择订单状态'){
+                this.orders = null;
+                return;
+            }
             let _state
             switch(this.state){
+                case '请选择订单状态': _state = -1;break;
                 case '等待审核': _state = 0;break;
                 case '等待配送': _state = 1;break;
                 case '正在前往起点': _state = 2;break;
@@ -141,7 +141,6 @@ export default {
                 }
             }).then(res=>{
                 if(res.data.msg == '查询到结果'){
-                    // this.orders = res.data.data
                     let res_data = res.data.data
                     for(let i=0; i<res_data.length; i++){
                         console.log(res_data[i].state)
@@ -164,7 +163,7 @@ export default {
                             res_data[i].state = '等待收货';
                         }
                         else{
-                            res_data[i].state = '配送车遇到异常状况';
+                            res_data[i].state = '状态查询失败';
                         }
                         this.orders = res_data;
                     }
