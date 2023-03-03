@@ -196,7 +196,7 @@ export default {
         path_planning(){
             this.$axios({
                 method: 'post',
-                url: 'http://localhost:5000/pts',
+                url: 'http://106.53.119.46/pts',
                 data: {
                     origin: this.$store.state.begin_lnglat,
                     destination: this.$store.state.end_lnglat
@@ -253,7 +253,7 @@ export default {
         getAddrStr(addr_str, flag){
             this.$axios({
                 method: 'post',
-                url: 'http://localhost:5000/inverse_coding',
+                url: 'http://106.53.119.46/inverse_coding',
                 data: {
                     code: addr_str
                 }

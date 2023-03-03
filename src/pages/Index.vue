@@ -53,7 +53,7 @@ export default {
       })
       let token = localStorage.getItem('token')
       let uid = localStorage.getItem('uid')
-      let url = 'http://localhost:5000/user/'+uid
+      let url = 'http://106.53.119.46/user/'+uid
       console.log(url)
       axios({  // 让后端做token校验
         headers: {

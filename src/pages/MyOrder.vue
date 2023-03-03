@@ -62,7 +62,7 @@ export default {
       let uid = localStorage.getItem('uid')
       this.$axios({
       method: 'get',
-      url: 'http://localhost:5000/orders/'+uid,
+      url: 'http://106.53.119.46/orders/'+uid,
       //responseType: 'stream'
       }).then(res=> {
           let res_data = res.data.data;

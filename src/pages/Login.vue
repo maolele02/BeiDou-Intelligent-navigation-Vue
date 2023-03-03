@@ -5,7 +5,7 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <img id="beidouImg" src="http://localhost/static/img/beidou.png" alt="北斗定点运送系统">
+                        <img id="beidouImg" src="http://106.53.119.46/static/img/beidou.png" alt="北斗定点运送系统">
                     </div>
 
                     <div id="loginBox" class="col-md-5 col-md-offset-1">
@@ -85,7 +85,7 @@ export default {
             console.log("login")
             this.$axios({
                     method: 'post',
-                    url: 'http://localhost:5000/login',
+                    url: 'http://106.53.119.46/login',
                     data:{
                         username: this.username,
                         pwd: this.pwd

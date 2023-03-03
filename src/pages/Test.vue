@@ -28,7 +28,7 @@ export default {
         }
     },
     mounted(){
-        this.socket = io('http://localhost:5001')
+        this.socket = io('http://106.53.119.46')
         
         this.socket.on('connect', ()=>{
             console.log('conneted!')

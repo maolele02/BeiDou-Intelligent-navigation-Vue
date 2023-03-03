@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:38:19
- * @LastEditTime: 2022-11-30 20:01:29
+ * @LastEditTime: 2023-03-03 17:12:50
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\UserManage.vue
@@ -94,7 +94,7 @@ export default {
         set_admin(uid){
             this.$axios({
                 method: 'get',
-                url: 'http://localhost:5000/user/setadmin/'+uid,
+                url: 'http://106.53.119.46/user/setadmin/'+uid,
             }).then(res=>{
                 if(res.data.msg == '操作成功'){
                     this.user_query()
@@ -108,7 +108,7 @@ export default {
         user_query(){
             this.$axios({
                 method: 'post',
-                url: 'http://localhost:5000/user/query',
+                url: 'http://106.53.119.46/user/query',
                 data: {
                     uid: this.uid,
                     username: this.username,

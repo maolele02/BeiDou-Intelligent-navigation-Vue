@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="col-md-2 col-md-offset-2">
-                    <img src="http://localhost/static/img/BeiDouLogo.png" alt="北斗云-定点运送系统">
+                    <img src="http://106.53.119.46/static/img/BeiDouLogo.png" alt="北斗云-定点运送系统">
                 </div>
                 
             </div>
@@ -223,7 +223,7 @@ export default {
                 this.mailTips=='' && this.nameTips=='' && this.confirmTips==''){
                 this.$axios({
                     method: 'post',
-                    url: 'http://localhost:5000/register',
+                    url: 'http://106.53.119.46/register',
                     data: {
                         username: this.username,
                         name: this.name,

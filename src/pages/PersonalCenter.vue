@@ -5,7 +5,7 @@
                 
                 <div class="row">
                     <div class="col-md-2 col-md-offset-1">
-                        <img id="profile" src="http://localhost/static/img/ProfilePic.jpg" alt="profile picture">
+                        <img id="profile" src="http://106.53.119.46/static/img/ProfilePic.jpg" alt="profile picture">
                     </div>
                 </div>
                 

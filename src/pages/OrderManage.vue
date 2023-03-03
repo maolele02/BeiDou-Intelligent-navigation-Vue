@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:37:49
- * @LastEditTime: 2023-03-02 22:02:43
+ * @LastEditTime: 2023-03-03 17:32:53
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\OrderManage.vue
@@ -105,7 +105,7 @@ export default {
         pass(oid){
             this.$axios({
                 method: 'get',
-                url: 'http://localhost:5000/order/pass/'+oid,
+                url: 'http://106.53.119.46/order/pass/'+oid,
             }).then(res=>{
                 if(res.data.msg == '操作成功'){
                     this.order_query()
@@ -133,7 +133,7 @@ export default {
             }
             this.$axios({
                 method: 'post',
-                url: 'http://localhost:5000/order/query',
+                url: 'http://106.53.119.46/order/query',
                 data: {
                     order_id: this.order_id,
                     username: this.username,
@@ -179,7 +179,7 @@ export default {
             let car_pt;
             this.$axios({
                 method: 'get',
-                url: 'http://localhost:5000/position/' + order_id,
+                url: 'http://106.53.119.46/position/' + order_id,
             }).then(res=>{
                 car_pt = res.data.data.point;
                 this.$router.push({

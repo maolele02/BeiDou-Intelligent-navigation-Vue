@@ -133,7 +133,7 @@ export default {
         this.order.s_uid = uid
         this.$axios({
             method: 'get',
-            url: 'http://localhost:5000/user/'+uid,
+            url: 'http://106.53.119.46/user/'+uid,
             }).then(res=> {
             let user = res.data.data
             if(user != null){
@@ -192,7 +192,7 @@ export default {
             this.order.item_weight = weight
             this.$axios({
             method: 'post',
-            url: 'http://localhost:5000/order',
+            url: 'http://106.53.119.46/order',
             data: this.order
             }).then(res=> {
                 if(res.data.msg == '订单提交成功'){

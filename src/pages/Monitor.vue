@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2023-03-03 16:49:21
+ * @LastEditTime: 2023-03-03 17:32:08
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -123,7 +123,7 @@
 
                 <div class="row" style="margin-top: 60px;">
                     <div class="col-md-12">
-                        <img src="http://localhost/static/img/BeiDouLogo.png" alt="北斗云" width="300px">
+                        <img src="http://106.53.119.46/static/img/BeiDouLogo.png" alt="北斗云" width="300px">
                     </div>
                 </div>
 
@@ -166,7 +166,7 @@ export default {
             }
             this.$axios({
                 method: 'get',
-                url: 'http://localhost:5000/position/'+this.oid,
+                url: 'http://106.53.119.46/position/'+this.oid,
             }).then(res=>{
                 if(res.data.msg == '查询成功'){
                     this.nowPosition = res.data.data.point;
@@ -184,7 +184,7 @@ export default {
             }
             this.$axios({
                 method: 'get',
-                url: 'http://localhost:5000/state/'+this.oid,
+                url: 'http://106.53.119.46/state/'+this.oid,
             }).then(res=>{
                 if(res.data.msg == '查询成功'){
                     this.nowTemp = res.data.data.i_temp;
@@ -201,7 +201,7 @@ export default {
             }
             this.$axios({
                 method: 'get',
-                url: 'http://localhost:5000/order/car/'+this.oid,
+                url: 'http://106.53.119.46/order/car/'+this.oid,
             }).then(res=>{
                 if(res.data.msg == '查询成功'){
                     if(res.data.data != null)
@@ -220,7 +220,7 @@ export default {
             }
             this.$axios({
                 method: 'get',
-                url: 'http://localhost:5000/car/'+this.cid,
+                url: 'http://106.53.119.46/car/'+this.cid,
             }).then(res=>{
                 if(res.data.msg == '查询成功'){
                     let res_data = res.data.data
@@ -244,7 +244,7 @@ export default {
         control(controlData){
             this.$axios({
                 method: 'post',
-                url: 'http://localhost:5000/control',
+                url: 'http://106.53.119.46/control',
                 data:{
                     cid: this.cid,
                     control_data: controlData
