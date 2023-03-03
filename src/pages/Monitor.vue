@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2023-03-03 10:18:00
+ * @LastEditTime: 2023-03-03 16:49:21
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -123,7 +123,7 @@
 
                 <div class="row" style="margin-top: 60px;">
                     <div class="col-md-12">
-                        <img src="../assets/BeiDouLogo.png" alt="北斗云" width="300px">
+                        <img src="http://localhost/static/img/BeiDouLogo.png" alt="北斗云" width="300px">
                     </div>
                 </div>
 

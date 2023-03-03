@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-28 21:56:38
- * @LastEditTime: 2023-03-02 21:57:24
+ * @LastEditTime: 2023-03-03 16:48:40
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\components\LeftMenu.vue
@@ -9,7 +9,7 @@
 <template>
   <div>
     <div class="col-md-2 menu" id="leftBox">
-      <img src="../assets/BeiDouLogo.png" width="100px" height="100px" alt="logo">
+      <img src="http://localhost/static/img/BeiDouLogo.png" width="100px" height="100px" alt="logo">
       <ul class="nav nav-pills nav-stacked" id="menuBox">
           <li><router-link active-class="active" to="/index/delivery">我的配送</router-link></li>
           <li><router-link active-class="active" to="/index/reserving">配送预约</router-link></li>

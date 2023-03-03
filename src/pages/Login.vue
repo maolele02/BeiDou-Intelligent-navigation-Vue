@@ -5,7 +5,7 @@
                 <div class="row">
 
                     <div class="col-md-6">
-                        <img id="beidouImg" src="../../src/assets/beidou.png" alt="北斗定点运送系统">
+                        <img id="beidouImg" src="http://localhost/static/img/beidou.png" alt="北斗定点运送系统">
                     </div>
 
                     <div id="loginBox" class="col-md-5 col-md-offset-1">

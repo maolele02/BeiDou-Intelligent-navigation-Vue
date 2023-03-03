@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="col-md-2 col-md-offset-2">
-                    <img src="../../src/assets/BeiDouLogo.png" alt="北斗云-定点运送系统">
+                    <img src="http://localhost/static/img/BeiDouLogo.png" alt="北斗云-定点运送系统">
                 </div>
                 
             </div>
