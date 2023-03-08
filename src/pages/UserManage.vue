@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-29 15:38:19
- * @LastEditTime: 2023-03-03 17:12:50
+ * @LastEditTime: 2023-03-08 21:16:04
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\UserManage.vue
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-default" @click="user_query">查询</button>
+                    <button class="btn btn-default" @click.prevent="user_query">查询</button>
                 </div>
             </form>
         </div>
