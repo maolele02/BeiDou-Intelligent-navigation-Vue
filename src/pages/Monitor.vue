@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2023-03-07 16:05:01
+ * @LastEditTime: 2023-03-09 20:01:18
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -37,25 +37,35 @@
                     
                         <div class="row">
                             <div class="col-md-3 col-md-offset-3">
-                                <button class=" btn btn-primary controllBtn marginTop10" @click="control('w')">前</button>
+                                <button class=" btn btn-primary controllBtn marginTop10" 
+                                @mousedown="control('w')"
+                                @mouseup="control('z')">前</button>
                             </div>
                         </div>
         
                         <div class="row">
                             <div class="col-md-3">
-                                <button class="btn btn-primary controllBtn marginTop10" @click="control('a')">左</button>
+                                <button class="btn btn-primary controllBtn marginTop10" 
+                                @mousedown="control('a')"
+                                @mouseup="control('z')">左</button>
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-warning controllBtn marginTop10" @click="control('b')">鸣笛</button>
+                                <button class="btn btn-warning controllBtn marginTop10" 
+                                @mousedown="control('b')"
+                                @mouseup="control('z')">鸣笛</button>
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-primary controllBtn marginTop10" @click="control('d')">右</button>
+                                <button class="btn btn-primary controllBtn marginTop10" 
+                                @mousedown="control('d')"
+                                @mouseup="control('z')">右</button>
                             </div>
                         </div>
         
                         <div class="row">
                             <div class="col-md-3 col-md-offset-3">
-                                <button class="btn btn-primary controllBtn marginTop10" @click="control('s')">后</button>
+                                <button class="btn btn-primary controllBtn marginTop10" 
+                                @mousedown="control('s')"
+                                @mouseup="control('z')">后</button>
                             </div>
                         </div>
                     </div>
@@ -63,7 +73,9 @@
 
                     <div class="col-md-4 col-md-offset-1">
                         <div class="marginTop65">
-                            <button class="btn btn-warning controllBtn" @click="control('f')">刹车</button>
+                            <button class="btn btn-warning controllBtn"
+                            @mousedown="control('f')"
+                            @mouseup="control('z')">刹车</button>
                         </div>
                     </div> 
                         </div>
