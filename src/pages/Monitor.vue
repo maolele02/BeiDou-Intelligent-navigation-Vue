@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-12-01 21:11:44
- * @LastEditTime: 2023-03-09 20:01:18
+ * @LastEditTime: 2023-03-09 22:34:01
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\Monitor.vue
@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button class="btn"  @click="ternView($event,1)">地图</button>
-                        <button class="btn moni_btn"  @click="ternView($event,2)">监控</button>
+                        <button class="btn moni_btn"  @click="ternView($event,2)">控制</button>
                     </div>
                 </div>
 
@@ -23,13 +23,13 @@
                     <MonitorMap v-if="map_init_flag" class="marginTop30" :x="nowX" :y="nowY"/>
                 </div>
 
-                <div class="row" v-show="view == 2">
+                <!-- <div class="row" v-show="view == 2">
                     <div class="col-md-12 Box marginTop30">
                         <MonitorVideo></MonitorVideo>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="row Box marginTop30" v-show="view == 2">
+                <div class="row Box control" v-show="view == 2">
                     <div class="col-md-12">
                         <div class="row">
                             <!--前后左右控制按钮-->
@@ -37,35 +37,35 @@
                     
                         <div class="row">
                             <div class="col-md-3 col-md-offset-3">
-                                <button class=" btn btn-primary controllBtn marginTop10" 
+                                <div class=" btn btn-primary controllBtn marginTop10" 
                                 @mousedown="control('w')"
-                                @mouseup="control('z')">前</button>
+                                @mouseup="control('z')">前</div>
                             </div>
                         </div>
         
                         <div class="row">
                             <div class="col-md-3">
-                                <button class="btn btn-primary controllBtn marginTop10" 
+                                <div class="btn btn-primary controllBtn marginTop10" 
                                 @mousedown="control('a')"
-                                @mouseup="control('z')">左</button>
+                                @mouseup="control('z')">左</div>
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-warning controllBtn marginTop10" 
+                                <div class="btn btn-warning controllBtn marginTop10" 
                                 @mousedown="control('b')"
-                                @mouseup="control('z')">鸣笛</button>
+                                @mouseup="control('z')">鸣笛</div>
                             </div>
                             <div class="col-md-3">
-                                <button class="btn btn-primary controllBtn marginTop10" 
+                                <div class="btn btn-primary controllBtn marginTop10" 
                                 @mousedown="control('d')"
-                                @mouseup="control('z')">右</button>
+                                @mouseup="control('z')">右</div>
                             </div>
                         </div>
         
                         <div class="row">
                             <div class="col-md-3 col-md-offset-3">
-                                <button class="btn btn-primary controllBtn marginTop10" 
+                                <div class="btn btn-primary controllBtn marginTop10" 
                                 @mousedown="control('s')"
-                                @mouseup="control('z')">后</button>
+                                @mouseup="control('z')">后</div>
                             </div>
                         </div>
                     </div>
@@ -73,9 +73,9 @@
 
                     <div class="col-md-4 col-md-offset-1">
                         <div class="marginTop65">
-                            <button class="btn btn-warning controllBtn"
+                            <div class="btn btn-warning controllBtn"
                             @mousedown="control('f')"
-                            @mouseup="control('z')">刹车</button>
+                            @mouseup="control('z')">刹车</div>
                         </div>
                     </div> 
                         </div>
@@ -323,5 +323,10 @@ button.controllBtn{
 
 .moni_map{
     margin-top: 20px
+}
+
+.control{
+    position:absolute;
+    margin-top: 45%;
 }
 </style>
