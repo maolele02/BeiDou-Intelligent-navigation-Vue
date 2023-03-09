@@ -1,7 +1,7 @@
 <!--
  * @Author: maolele02
  * @Date: 2022-11-18 22:09:19
- * @LastEditTime: 2022-11-30 21:59:20
+ * @LastEditTime: 2023-03-09 13:52:40
  * @LastEditors: maolele02
  * @Description: 
  * @FilePath: \beidou\src\pages\MyOrder.vue
@@ -73,7 +73,7 @@ export default {
               // 对GMT时间格式做转换
                let timeGMT = res_data[i].order_time;
                let datetime = new Date(timeGMT);
-               let localTime = datetime.toLocaleString();
+               let localTime = datetime.toLocaleString('zh-cn');
                res_data[i].order_time = localTime;
 
               // 对state做转换
